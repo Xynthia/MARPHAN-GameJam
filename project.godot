@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="MARPHAN GameJam"
+run/main_scene="uid://6vxr6p0dqd3w"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 
