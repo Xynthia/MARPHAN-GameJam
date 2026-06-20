@@ -1,0 +1,174 @@
+[gd_scene format=3 uid="uid://yrwevoqm0s0r"]
+
+[ext_resource type="PackedScene" uid="uid://c273p6mje7byj" path="res://scenes/player.tscn" id="1_o5qli"]
+[ext_resource type="Script" uid="uid://81nmgo14aoka" path="res://script/main.gd" id="1_sugp2"]
+[ext_resource type="PackedScene" uid="uid://bjjpkpicxutsa" path="res://scenes/octopus.tscn" id="2_jyhfs"]
+[ext_resource type="Script" uid="uid://dde4v24j6c25o" path="res://script/boxes_manager.gd" id="4_jyhfs"]
+[ext_resource type="Script" uid="uid://dibx2gd7xhs7h" path="res://script/wave_manager.gd" id="5_tbgi4"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0wfyh"]
+
+[sub_resource type="Sky" id="Sky_o5qli"]
+sky_material = SubResource("ProceduralSkyMaterial_0wfyh")
+
+[sub_resource type="Environment" id="Environment_24de5"]
+background_mode = 2
+sky = SubResource("Sky_o5qli")
+ambient_light_source = 3
+reflected_light_source = 2
+
+[sub_resource type="Curve3D" id="Curve3D_jyhfs"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, -5, 0, 0, 0, 10, 0, 10, 0, 0, 0, 0, 0, 0, 10, 0, 20),
+"tilts": PackedFloat32Array(0, 0, 0)
+}
+point_count = 3
+
+[sub_resource type="Curve3D" id="Curve3D_tbgi4"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7.5, 0, 0, 5, 0, 0, 0, 0, -7.5, 0, 0, 0, 20, 0, 15, 0, 0, 0, 0, 0, 0, 20, 0, 30),
+"tilts": PackedFloat32Array(0, 0, 0, 0)
+}
+point_count = 4
+
+[sub_resource type="Curve3D" id="Curve3D_tefeu"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 10, 0, 0, 0, 0, -10, 0, 0, 0, 30, 0, 20, 0, 0, 0, 0, 0, 0, 30, 0, 30, 0, 0, 0, 0, 0, 0, 30, 0, 40),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0)
+}
+point_count = 5
+
+[node name="Main" type="Node3D" unique_id=1114938022]
+script = ExtResource("1_sugp2")
+
+[node name="Octopus" parent="." unique_id=960680343 instance=ExtResource("2_jyhfs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=19448544]
+transform = Transform3D(1, 0, 0, 0, 0.8048938, 0.5934189, 0, -0.5934189, 0.8048938, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2107853557]
+environment = SubResource("Environment_24de5")
+
+[node name="Player" parent="." unique_id=699919053 instance=ExtResource("1_o5qli")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0.5, 15)
+
+[node name="BoxesManager" type="Node3D" parent="." unique_id=1788276591]
+script = ExtResource("4_jyhfs")
+
+[node name="WaveManager" type="Node3D" parent="." unique_id=465464057]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
+script = ExtResource("5_tbgi4")
+
+[node name="Path1" type="Path3D" parent="WaveManager" unique_id=265351162]
+curve = SubResource("Curve3D_jyhfs")
+
+[node name="Path1Follow1" type="PathFollow3D" parent="WaveManager/Path1" unique_id=191617991]
+transform = Transform3D(-4.371135e-08, 0, -0.9999991, 0, 1, 0, 0.9999991, 0, -4.371135e-08, 0, 0, 0)
+
+[node name="Path1Follow2" type="PathFollow3D" parent="WaveManager/Path1" unique_id=2003327008]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
+
+[node name="Path1Follow3" type="PathFollow3D" parent="WaveManager/Path1" unique_id=934686271]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
+
+[node name="Path1Follow4" type="PathFollow3D" parent="WaveManager/Path1" unique_id=364570141]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
+
+[node name="Path1Follow5" type="PathFollow3D" parent="WaveManager/Path1" unique_id=683393266]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
+
+[node name="Path1Follow6" type="PathFollow3D" parent="WaveManager/Path1" unique_id=223598524]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
+
+[node name="Path1Follow7" type="PathFollow3D" parent="WaveManager/Path1" unique_id=813786499]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
+
+[node name="Path2" type="Path3D" parent="WaveManager" unique_id=1921214950]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -5)
+curve = SubResource("Curve3D_tbgi4")
+
+[node name="Path2Follow1" type="PathFollow3D" parent="WaveManager/Path2" unique_id=2033619369]
+transform = Transform3D(-4.371125e-08, 0, -0.99999684, 0, 1, 0, 0.99999684, 0, -4.371125e-08, 0, 0, 0)
+
+[node name="Path2Follow2" type="PathFollow3D" parent="WaveManager/Path2" unique_id=1834725850]
+transform = Transform3D(-4.3711168e-08, 0, -0.99999493, 0, 1, 0, 0.99999493, 0, -4.3711168e-08, 3.999495, 0, 0)
+progress = 4.0
+
+[node name="Path2Follow3" type="PathFollow3D" parent="WaveManager/Path2" unique_id=1856425093]
+transform = Transform3D(-0.24457723, 0, -0.9696198, 0, 1, 0, 0.9696198, 0, -0.24457723, 7.968331, 0, 0.37871036)
+progress = 8.0
+
+[node name="Path2Follow4" type="PathFollow3D" parent="WaveManager/Path2" unique_id=511132335]
+transform = Transform3D(-4.371125e-08, 0, -0.99999684, 0, 1, 0, 0.99999684, 0, -4.371125e-08, 0, 0, 0)
+
+[node name="Path2Follow5" type="PathFollow3D" parent="WaveManager/Path2" unique_id=453406671]
+transform = Transform3D(-4.371125e-08, 0, -0.99999684, 0, 1, 0, 0.99999684, 0, -4.371125e-08, 0, 0, 0)
+
+[node name="Path2Follow6" type="PathFollow3D" parent="WaveManager/Path2" unique_id=1115874710]
+transform = Transform3D(-4.371125e-08, 0, -0.99999684, 0, 1, 0, 0.99999684, 0, -4.371125e-08, 0, 0, 0)
+
+[node name="Path2Follow7" type="PathFollow3D" parent="WaveManager/Path2" unique_id=1621955217]
+transform = Transform3D(-4.371125e-08, 0, -0.99999684, 0, 1, 0, 0.99999684, 0, -4.371125e-08, 0, 0, 0)
+
+[node name="Path2Follow8" type="PathFollow3D" parent="WaveManager/Path2" unique_id=1146525032]
+transform = Transform3D(-4.371125e-08, 0, -0.99999684, 0, 1, 0, 0.99999684, 0, -4.371125e-08, 0, 0, 0)
+
+[node name="Path2Follow9" type="PathFollow3D" parent="WaveManager/Path2" unique_id=1792505256]
+transform = Transform3D(-4.371125e-08, 0, -0.99999684, 0, 1, 0, 0.99999684, 0, -4.371125e-08, 0, 0, 0)
+
+[node name="Path2Follow10" type="PathFollow3D" parent="WaveManager/Path2" unique_id=1460134407]
+transform = Transform3D(-4.371125e-08, 0, -0.99999684, 0, 1, 0, 0.99999684, 0, -4.371125e-08, 0, 0, 0)
+
+[node name="Path2Follow11" type="PathFollow3D" parent="WaveManager/Path2" unique_id=304287209]
+transform = Transform3D(-4.371125e-08, 0, -0.99999684, 0, 1, 0, 0.99999684, 0, -4.371125e-08, 0, 0, 0)
+
+[node name="Path3" type="Path3D" parent="WaveManager" unique_id=1113933535]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -10)
+curve = SubResource("Curve3D_tefeu")
+
+[node name="Path3Follow1" type="PathFollow3D" parent="WaveManager/Path3" unique_id=247094907]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
+
+[node name="Path3Follow2" type="PathFollow3D" parent="WaveManager/Path3" unique_id=1605504981]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
+
+[node name="Path3Follow3" type="PathFollow3D" parent="WaveManager/Path3" unique_id=93707408]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
+
+[node name="Path3Follow4" type="PathFollow3D" parent="WaveManager/Path3" unique_id=1926422600]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
+
+[node name="Path3Follow5" type="PathFollow3D" parent="WaveManager/Path3" unique_id=2067603404]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
+
+[node name="Path3Follow6" type="PathFollow3D" parent="WaveManager/Path3" unique_id=1026634630]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
+
+[node name="Path3Follow7" type="PathFollow3D" parent="WaveManager/Path3" unique_id=697573837]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
+
+[node name="Path3Follow8" type="PathFollow3D" parent="WaveManager/Path3" unique_id=663325476]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
+
+[node name="Path3Follow9" type="PathFollow3D" parent="WaveManager/Path3" unique_id=977301088]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
+
+[node name="Path3Follow10" type="PathFollow3D" parent="WaveManager/Path3" unique_id=1367529017]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
+
+[node name="Path3Follow11" type="PathFollow3D" parent="WaveManager/Path3" unique_id=253100195]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
+
+[node name="Path3Follow12" type="PathFollow3D" parent="WaveManager/Path3" unique_id=1195561444]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
+
+[node name="Path3Follow13" type="PathFollow3D" parent="WaveManager/Path3" unique_id=2035071507]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
+
+[node name="Path3Follow14" type="PathFollow3D" parent="WaveManager/Path3" unique_id=1763687192]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
+
+[node name="Path3Follow15" type="PathFollow3D" parent="WaveManager/Path3" unique_id=492340607]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)

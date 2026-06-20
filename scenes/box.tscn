@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://2h5go3uqh1pv"]
+
+[ext_resource type="Script" uid="uid://bvsg1fxhpnbhr" path="res://script/box.gd" id="1_3inec"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_swqr5"]
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.43232596, 0.25796032, 0, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_24de5"]
+
+[node name="Box" type="StaticBody3D" unique_id=2089173263 groups=["Box"]]
+script = ExtResource("1_3inec")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=668260898]
+material_override = SubResource("StandardMaterial3D_swqr5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1188238682]
+shape = SubResource("BoxShape3D_24de5")

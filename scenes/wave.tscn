@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://bwkrwr46mhs6x"]
+
+[ext_resource type="Script" uid="uid://du8qb2edetgkl" path="res://script/wave.gd" id="1_y5ysc"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_y5ysc"]
+radius = 2.5
+
+[node name="Wave" type="Area3D" unique_id=576208127]
+script = ExtResource("1_y5ysc")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=760655614]
+size = Vector3(0.1, 2, 4)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=726056149]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.9606109)
+shape = SubResource("SphereShape3D_y5ysc")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

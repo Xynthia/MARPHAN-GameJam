@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://bjjpkpicxutsa"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_24de5"]
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.81057054, 0.48096758, 1, 1)
+
+[node name="Octopus" type="Node3D" unique_id=960680343]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=910726253]
+size = Vector3(5, 5, 5)
+material = SubResource("StandardMaterial3D_24de5")
