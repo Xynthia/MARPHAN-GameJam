@@ -4,11 +4,12 @@
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_swqr5"]
 vertex_color_use_as_albedo = true
-albedo_color = Color(0.43232596, 0.25796032, 0, 1)
+albedo_color = Color(0.3044851, 0.13986096, 2.4065375e-08, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_24de5"]
 
-[node name="Box" type="StaticBody3D" unique_id=2089173263 groups=["Box"]]
+[node name="Box" type="Area3D" unique_id=1728740162 groups=["Box"]]
+collision_mask = 32768
 script = ExtResource("1_3inec")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=668260898]
@@ -16,3 +17,5 @@ material_override = SubResource("StandardMaterial3D_swqr5")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1188238682]
 shape = SubResource("BoxShape3D_24de5")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

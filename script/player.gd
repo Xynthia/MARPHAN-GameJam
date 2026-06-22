@@ -4,7 +4,6 @@ extends CharacterBody3D
 @onready var csg_box_3d: CSGBox3D = $CSGBox3D
 @onready var collision_shape_3d: CollisionShape3D = $CollisionShape3D
 
-
 enum lanes {LEFT, MIDDLE, RIGHT}
 var current_lane : lanes = lanes.RIGHT
 
@@ -24,7 +23,6 @@ var max_bank_idle_amount : int = 10
 var moving : bool = false :
 	set(value):
 		animation_idle(value)
-
 
 func _ready() -> void:
 	moving = false
@@ -81,30 +79,30 @@ func move_lane(dir : Vector3) -> void:
 					pass
 				Vector3.MODEL_RIGHT:
 					next_lane = lanes.MIDDLE
-					move_dir += move_amount 
-					move_foward_dir += move_amount
+					move_dir = 15
+					move_foward_dir = 10
 					turn_dir -= randi_range(min_turn_amount ,max_turn_amount)
 					bank_dir -= randi_range(min_bank_amount ,max_bank_amount)
 		lanes.MIDDLE:
 			match dir:
 				Vector3.MODEL_LEFT:
 					next_lane = lanes.LEFT
-					move_dir -= move_amount 
-					move_foward_dir -= move_amount
+					move_dir = 10
+					move_foward_dir = 5
 					turn_dir += randi_range(min_turn_amount ,max_turn_amount)
 					bank_dir += randi_range(min_bank_amount ,max_bank_amount)
 				Vector3.MODEL_RIGHT:
 					next_lane = lanes.RIGHT
-					move_dir += move_amount 
-					move_foward_dir += move_amount
+					move_dir = 20
+					move_foward_dir = 15
 					turn_dir -= randi_range(min_turn_amount ,max_turn_amount)
 					bank_dir -= randi_range(min_bank_amount ,max_bank_amount)
 		lanes.RIGHT:
 			match dir:
 				Vector3.MODEL_LEFT:
 					next_lane = lanes.MIDDLE
-					move_dir -= move_amount
-					move_foward_dir -= move_amount
+					move_dir = 15
+					move_foward_dir = 10
 					turn_dir += randi_range(min_turn_amount ,max_turn_amount)
 					bank_dir += randi_range(min_bank_amount ,max_bank_amount)
 				Vector3.MODEL_RIGHT:
@@ -145,16 +143,11 @@ func move_lane(dir : Vector3) -> void:
 		tween_bank.set_ease(Tween.EASE_OUT_IN)
 		tween_bank.chain().tween_property(csg_box_3d, "rotation_degrees:z", turn_normal_amount.z, 2)
 	
-		await tween_move.finished
+		await tween_move.finished 
+		current_lane = next_lane
 		await tween_turn.finished
 		moving = false
-		current_lane = next_lane
-
-func slow_down() -> void:
-	print("slows down")
-
 
 func _on_area_3d_body_entered(body: Node3D) -> void:
 	if body.is_in_group("Box"):
-		
-		slow_down()
+		Main.slow_down()

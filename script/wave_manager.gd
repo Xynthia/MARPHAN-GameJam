@@ -1,19 +1,47 @@
 class_name WaveManager
 extends Node3D
 
+enum speeds {SLOW, NORMAL, FAST}
+
 @onready var path_1: Path3D = $Path1
 @onready var path_2: Path3D = $Path2
 @onready var path_3: Path3D = $Path3
 
 const WAVE = preload("uid://bwkrwr46mhs6x")
 
+var waves : Array[Wave]
+var current_speed : speeds = speeds.NORMAL
+
 func _ready() -> void:
 	fill_path()
+	Main.wave_manager = self
+
+func change_speed(new_speed: speeds) -> void:
+	for wave in waves:
+		match new_speed:
+			speeds.SLOW:
+				wave.speed = wave.slow_speed
+				current_speed = speeds.SLOW
+			speeds.NORMAL:
+				wave.speed = wave.normal_speed
+				current_speed = speeds.NORMAL
+			speeds.FAST:
+				wave.speed = wave.fast_speed
+				current_speed = speeds.FAST
 
 func spawn_wave(parent : PathFollow3D, distance : int) -> void:
 	var new_wave = WAVE.instantiate()
+	waves.append(new_wave)
 	parent.add_child(new_wave)
 	parent.progress = distance
+
+func hide_wave(parent : PathFollow3D) -> void:
+	var wave = parent.get_child(0)
+	wave.visible = false
+
+func view_wave(parent : PathFollow3D) -> void:
+	var wave = parent.get_child(0)
+	wave.visible = true
 
 func fill_path() -> void:
 	var amount : int = 0
