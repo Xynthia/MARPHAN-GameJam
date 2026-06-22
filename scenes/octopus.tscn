@@ -11,67 +11,76 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Node3D:rotation")
+tracks/0/path = NodePath("CSGBox3D3:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0, 0, 0)]
+"values": [Vector3(0, 1.2, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_enbs0"]
 resource_name = "arm up"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Node3D:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0.97563905, 0, 0)]
-}
 
-[sub_resource type="Animation" id="Animation_w6hxi"]
-resource_name = "slam_down"
+[sub_resource type="Animation" id="Animation_ionst"]
+resource_name = "close_mouth"
 length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Node3D:rotation")
+tracks/0/path = NodePath("CSGBox3D3:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(0.97563905, 0, 0), Vector3(0, 0, 0)]
+"values": [Vector3(0, 2.2, 0), Vector3(0, 1.2, 0)]
 }
+
+[sub_resource type="Animation" id="Animation_fhwgg"]
+resource_name = "open_mouth"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CSGBox3D3:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 1.2, 0), Vector3(0, 2.2, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_w6hxi"]
+resource_name = "slam_down"
+length = 0.3
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fhwgg"]
 _data = {
 &"RESET": SubResource("Animation_lmf8n"),
 &"arm up": SubResource("Animation_enbs0"),
+&"close_mouth": SubResource("Animation_ionst"),
+&"open_mouth": SubResource("Animation_fhwgg"),
 &"slam_down": SubResource("Animation_w6hxi")
 }
 
 [node name="Octopus" type="Node3D" unique_id=960680343]
 script = ExtResource("1_enbs0")
 
+[node name="CSGBox3D3" type="CSGBox3D" parent="." unique_id=68289608]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+size = Vector3(5, 2.5, 5)
+material = SubResource("StandardMaterial3D_24de5")
+
 [node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=910726253]
-size = Vector3(5, 5, 5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.2, 0)
+size = Vector3(5, 2.5, 5)
 material = SubResource("StandardMaterial3D_24de5")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1024259226]
 libraries/ = SubResource("AnimationLibrary_fhwgg")
-
-[node name="Node3D" type="Node3D" parent="." unique_id=1286225235]
-
-[node name="CSGBox3D2" type="CSGBox3D" parent="Node3D" unique_id=1848999401]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, -13.685)
-size = Vector3(1, 1, 25)
-material = SubResource("StandardMaterial3D_24de5")

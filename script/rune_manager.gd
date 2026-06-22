@@ -4,7 +4,7 @@ extends Node3D
 const RUNE = preload("uid://c3ry4r5ygg5i0")
 
 var runes : Array[Rune]
-var max_runes_amount : int = 3
+var max_runes_amount : int = 2
 
 func _ready() -> void:
 	Main.rune_manager = self

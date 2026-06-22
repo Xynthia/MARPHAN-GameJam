@@ -1,12 +1,12 @@
 class_name Wave
 extends Node3D
 
-const slow_speed : int = 10
-const normal_speed : int = 15
-const fast_speed : int = 20
 
 var parent : PathFollow3D
-var speed : float = 15
+var speed : int :
+	set(value):
+		speed = clamp(value, 0, 50)
+		
 
 @onready var csg_box_3d: CSGBox3D = $CSGBox3D
 
@@ -17,9 +17,10 @@ var moving_below : bool = false :
 func _ready() -> void:
 	moving_below = false
 	parent = get_parent()
+	speed = 15
 
 func _process(delta: float) -> void:
-	parent.progress_ratio += delta * (speed / 100)
+	parent.progress_ratio += delta * speed /100
 
 func idle(is_moving) -> void:
 	var tween : Tween = create_tween()

@@ -57,6 +57,14 @@ func animation_idle(is_moving: bool) -> void:
 		tween_idle_bank.kill()
 		tween_idle_pitch.kill()
 
+func attack_octupus() -> void:
+	if !Main.octopus.mouth_open:
+		Main.octopus.take_damage()
+		Main.wave_manager.set_speed(15)
+	else:
+		#die
+		pass
+
 func move_lane(dir : Vector3) -> void:
 	var tween_move : Tween = create_tween()
 	var tween_bank : Tween = create_tween()
@@ -75,7 +83,7 @@ func move_lane(dir : Vector3) -> void:
 			match dir:
 				Vector3.MODEL_LEFT:
 					next_lane = lanes.LEFT
-					#slam octupus
+					#attack_octupus()
 					pass
 				Vector3.MODEL_RIGHT:
 					next_lane = lanes.MIDDLE
@@ -147,7 +155,3 @@ func move_lane(dir : Vector3) -> void:
 		current_lane = next_lane
 		await tween_turn.finished
 		moving = false
-
-func _on_area_3d_body_entered(body: Node3D) -> void:
-	if body.is_in_group("Box"):
-		Main.slow_down()

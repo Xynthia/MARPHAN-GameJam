@@ -1,8 +1,6 @@
 class_name WaveManager
 extends Node3D
 
-enum speeds {SLOW, NORMAL, FAST}
-
 @onready var path_1: Path3D = $Path1
 @onready var path_2: Path3D = $Path2
 @onready var path_3: Path3D = $Path3
@@ -10,24 +8,19 @@ enum speeds {SLOW, NORMAL, FAST}
 const WAVE = preload("uid://bwkrwr46mhs6x")
 
 var waves : Array[Wave]
-var current_speed : speeds = speeds.NORMAL
+
 
 func _ready() -> void:
 	fill_path()
 	Main.wave_manager = self
 
-func change_speed(new_speed: speeds) -> void:
+func change_speed(amount: int) -> void:
 	for wave in waves:
-		match new_speed:
-			speeds.SLOW:
-				wave.speed = wave.slow_speed
-				current_speed = speeds.SLOW
-			speeds.NORMAL:
-				wave.speed = wave.normal_speed
-				current_speed = speeds.NORMAL
-			speeds.FAST:
-				wave.speed = wave.fast_speed
-				current_speed = speeds.FAST
+		wave.speed += amount
+
+func set_speed(amount : int) -> void:
+	for wave in waves:
+		wave.speed = amount
 
 func spawn_wave(parent : PathFollow3D, distance : int) -> void:
 	var new_wave = WAVE.instantiate()
