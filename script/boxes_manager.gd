@@ -6,7 +6,7 @@ enum speeds {SLOW, NORMAL, FAST}
 const BOX_SCENE = preload("uid://2h5go3uqh1pv")
 
 var boxes : Array[Box]
-var max_amount_boxes : int = 3
+var max_amount_boxes : int = 1
 
 func _ready() -> void:
 	Main.boxes_manager = self

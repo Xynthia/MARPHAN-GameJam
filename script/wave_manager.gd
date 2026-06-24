@@ -13,6 +13,7 @@ var waves : Array[Wave]
 func _ready() -> void:
 	fill_path()
 	Main.wave_manager = self
+	Main.in_game = true
 
 func change_speed(amount: int) -> void:
 	for wave in waves:

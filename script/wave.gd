@@ -3,9 +3,21 @@ extends Node3D
 
 
 var parent : PathFollow3D
-var speed : int :
+var start_speed : float = 15
+var max_speed: float = 50
+var ramming_speed : float = (max_speed/ 100) * 75
+var speed : float :
 	set(value):
-		speed = clamp(value, 0, 50)
+		speed = clamp(value, 0, max_speed)
+		if Main.ui:
+			Main.ui.player_speed_bar.value = speed
+		
+		if speed == 0:
+			Main.die()
+		if speed >= ramming_speed:
+			Main.ramming_speed = true
+		else:
+			Main.ramming_speed = false
 		
 
 @onready var csg_box_3d: CSGBox3D = $CSGBox3D
@@ -17,7 +29,7 @@ var moving_below : bool = false :
 func _ready() -> void:
 	moving_below = false
 	parent = get_parent()
-	speed = 15
+	speed = start_speed
 
 func _process(delta: float) -> void:
 	parent.progress_ratio += delta * speed /100

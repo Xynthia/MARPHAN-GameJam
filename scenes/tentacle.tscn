@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://cbvjvo4xnm27j"]
+
+[ext_resource type="Script" uid="uid://cdjxl2t2sr755" path="res://script/tentacle.gd" id="1_spd53"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ounal"]
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.81057054, 0.48096758, 1, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yuwuw"]
+
+[node name="Tentacle" type="Area3D" unique_id=1321864527]
+collision_mask = 32768
+script = ExtResource("1_spd53")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=884368135]
+material = SubResource("StandardMaterial3D_ounal")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=580810932]
+shape = SubResource("BoxShape3D_yuwuw")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

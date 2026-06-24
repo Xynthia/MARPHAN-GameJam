@@ -1,11 +1,13 @@
 [gd_scene format=3 uid="uid://yrwevoqm0s0r"]
 
-[ext_resource type="PackedScene" uid="uid://c273p6mje7byj" path="res://scenes/player.tscn" id="1_o5qli"]
-[ext_resource type="PackedScene" uid="uid://bjjpkpicxutsa" path="res://scenes/octopus.tscn" id="2_jyhfs"]
-[ext_resource type="Script" uid="uid://dde4v24j6c25o" path="res://script/boxes_manager.gd" id="4_jyhfs"]
-[ext_resource type="Script" uid="uid://dibx2gd7xhs7h" path="res://script/wave_manager.gd" id="5_tbgi4"]
-[ext_resource type="Script" uid="uid://r3dhaxhwjthv" path="res://script/rune_manager.gd" id="5_tefeu"]
-[ext_resource type="Script" uid="uid://cg1eq3fea6j1n" path="res://script/spawn_manager.gd" id="6_tefeu"]
+[ext_resource type="PackedScene" uid="uid://bjjpkpicxutsa" path="res://scenes/octopus.tscn" id="1_0tnpc"]
+[ext_resource type="Script" uid="uid://bx1kmgd0ck12n" path="res://script/game.gd" id="1_gee14"]
+[ext_resource type="PackedScene" uid="uid://c273p6mje7byj" path="res://scenes/player.tscn" id="2_vtaks"]
+[ext_resource type="Script" uid="uid://dibx2gd7xhs7h" path="res://script/wave_manager.gd" id="3_kvpfn"]
+[ext_resource type="Script" uid="uid://dde4v24j6c25o" path="res://script/boxes_manager.gd" id="4_dinhu"]
+[ext_resource type="Script" uid="uid://r3dhaxhwjthv" path="res://script/rune_manager.gd" id="5_kvuet"]
+[ext_resource type="Script" uid="uid://b8gdvv2oxuihj" path="res://script/tentacle_manager.gd" id="6_trtic"]
+[ext_resource type="Script" uid="uid://cg1eq3fea6j1n" path="res://script/spawn_manager.gd" id="7_ir15t"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0wfyh"]
 
@@ -42,9 +44,10 @@ point_count = 5
 [sub_resource type="BoxShape3D" id="BoxShape3D_24de5"]
 size = Vector3(7, 1, 12)
 
-[node name="Main" type="Node3D" unique_id=1114938022]
+[node name="Game" type="Node3D" unique_id=1114938022]
+script = ExtResource("1_gee14")
 
-[node name="Octopus" parent="." unique_id=960680343 instance=ExtResource("2_jyhfs")]
+[node name="Octopus" parent="." unique_id=960680343 instance=ExtResource("1_0tnpc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=19448544]
@@ -54,15 +57,12 @@ shadow_enabled = true
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2107853557]
 environment = SubResource("Environment_24de5")
 
-[node name="Player" parent="." unique_id=699919053 instance=ExtResource("1_o5qli")]
+[node name="Player" parent="." unique_id=699919053 instance=ExtResource("2_vtaks")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0.5, 15)
-
-[node name="BoxesManager" type="Node3D" parent="." unique_id=1788276591]
-script = ExtResource("4_jyhfs")
 
 [node name="WaveManager" type="Node3D" parent="." unique_id=465464057]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
-script = ExtResource("5_tbgi4")
+script = ExtResource("3_kvpfn")
 
 [node name="Path1" type="Path3D" parent="WaveManager" unique_id=265351162]
 curve = SubResource("Curve3D_jyhfs")
@@ -176,11 +176,17 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0
 [node name="Path3Follow15" type="PathFollow3D" parent="WaveManager/Path3" unique_id=492340607]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
 
+[node name="BoxesManager" type="Node3D" parent="." unique_id=1788276591]
+script = ExtResource("4_dinhu")
+
 [node name="RuneManager" type="Node3D" parent="." unique_id=1313547416]
-script = ExtResource("5_tefeu")
+script = ExtResource("5_kvuet")
+
+[node name="TentacleManager" type="Node3D" parent="." unique_id=810999940]
+script = ExtResource("6_trtic")
 
 [node name="SpawnManager" type="Node3D" parent="." unique_id=1434470221]
-script = ExtResource("6_tefeu")
+script = ExtResource("7_ir15t")
 
 [node name="Area3D" type="Area3D" parent="SpawnManager" unique_id=968588502]
 

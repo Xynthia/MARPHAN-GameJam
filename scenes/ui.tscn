@@ -1,0 +1,228 @@
+[gd_scene format=3 uid="uid://jtuhyn3sh7m7"]
+
+[ext_resource type="Script" uid="uid://3kowtepeef6s" path="res://script/ui.gd" id="1_x4jx1"]
+[ext_resource type="Texture2D" uid="uid://d0o04ajqrp0d0" path="res://icon.svg" id="2_yev5y"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tipki"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(0.1, 0.1, 0.1, 0.3)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_85g3d"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(0.94509804, 0, 0.08627451, 0.5411765)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_choun"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(0.1, 0.1, 0.1, 0.3)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ya4ey"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(0, 0.5314506, 0.82502365, 0.5411765)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 6
+
+[node name="UI" type="Control" unique_id=990566653]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_x4jx1")
+
+[node name="RammingLabel" type="Control" parent="." unique_id=810525279]
+custom_minimum_size = Vector2(220, 65)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -110.0
+offset_top = -78.0
+offset_right = 110.0
+offset_bottom = -13.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="RammingLabel" unique_id=914194059]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -11.5
+offset_bottom = 11.5
+grow_horizontal = 0
+grow_vertical = 2
+text = "to ram octopus"
+vertical_alignment = 1
+uppercase = true
+
+[node name="Sprite2D" type="Sprite2D" parent="RammingLabel" unique_id=849526810]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_yev5y")
+centered = false
+
+[node name="OctopusHealthBar" type="Control" parent="." unique_id=2115411625]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -150.0
+offset_top = 15.0
+offset_right = 150.0
+offset_bottom = 40.0
+grow_horizontal = 2
+
+[node name="OctopusHealthBar" type="ProgressBar" parent="OctopusHealthBar" unique_id=175425547]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 0
+offset_right = 300.0
+offset_bottom = 27.0
+theme_override_styles/background = SubResource("StyleBoxFlat_tipki")
+theme_override_styles/fill = SubResource("StyleBoxFlat_85g3d")
+value = 100.0
+rounded = true
+show_percentage = false
+
+[node name="PlayerSpeedBar" type="Control" parent="." unique_id=203652237]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 15.0
+offset_top = -40.0
+offset_right = 315.0
+offset_bottom = -15.0
+grow_vertical = 0
+
+[node name="PlayerSpeedBar" type="ProgressBar" parent="PlayerSpeedBar" unique_id=1170778149]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -27.0
+offset_right = 300.0
+grow_vertical = 0
+theme_override_styles/background = SubResource("StyleBoxFlat_choun")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ya4ey")
+max_value = 50.0
+value = 15.0
+rounded = true
+show_percentage = false
+
+[node name="GameChange" type="Panel" parent="." unique_id=1779493643]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GameChangeLabel" type="Label" parent="GameChange" unique_id=843283217]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "You Died!"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="ContineuLabel" type="Label" parent="GameChange" unique_id=2042315759]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -108.0
+offset_top = 26.0
+offset_right = 108.0
+offset_bottom = 49.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "press 'space' to go to main menu"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="MainMenu" type="Control" parent="." unique_id=1977315906]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenu" unique_id=970322632]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -94.5
+offset_top = -40.0
+offset_right = 94.5
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MainMenuLabel" type="Label" parent="MainMenu/VBoxContainer" unique_id=1071009596]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Main Menu"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="StartButton" type="Button" parent="MainMenu/VBoxContainer" unique_id=962269968]
+layout_mode = 2
+text = "START"
+
+[connection signal="pressed" from="MainMenu/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]

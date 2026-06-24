@@ -19,53 +19,84 @@ var turn_normal_amount : Vector3 = Vector3.ZERO
 var min_bank_idle_amount : int = 5
 var max_bank_idle_amount : int = 10
 
+var octopus_hit_pos : Vector3 = Vector3(15, 0.5, 3)
+var start_pos : Vector3 
+
+var attacking : bool = false
 
 var moving : bool = false :
 	set(value):
-		animation_idle(value)
+		moving = value
+		
+		if moving == false:
+			animation_idle()
 
 func _ready() -> void:
+	Main.player = self
 	moving = false
+	start_pos = global_position
 
 func _input(event: InputEvent) -> void:
+	print(moving)
+	
+	if event.is_action_pressed("ramming") && Main.octopus.is_in_middle_pos && !attacking:
+		attack_octupus()
+	
 	if event.is_action_pressed("move left") && !moving:
 		move_lane(Vector3.MODEL_LEFT)
 	if event.is_action_pressed("move right") && !moving:
 		move_lane(Vector3.MODEL_RIGHT)
 
-func animation_idle(is_moving: bool) -> void:
+func animation_idle() -> void:
 	var tween_idle_bank : Tween = create_tween()
 	var tween_idle_pitch : Tween = create_tween()
-	if !is_moving:
-		tween_idle_bank.set_loops()
-		tween_idle_pitch.set_loops()
-		var bank_amount : int = randi_range(min_bank_idle_amount, max_bank_idle_amount)
-		var pitch_amount : int = randi_range(min_pitch_amount, max_pitch_amount)
-		
-		tween_idle_bank.tween_property(csg_box_3d, "rotation_degrees:z", bank_amount, 3)
-		tween_idle_pitch.tween_property(csg_box_3d, "rotation_degrees:x", pitch_amount, 3)
-		
-		tween_idle_bank.tween_interval(0.1)
-		tween_idle_pitch.tween_interval(0.1)
-		
-		tween_idle_bank.tween_property(csg_box_3d, "rotation_degrees:z", 0, 3)
-		tween_idle_pitch.tween_property(csg_box_3d, "rotation_degrees:x", 0, 3)
-		
-		tween_idle_bank.tween_interval(2)
-		tween_idle_pitch.tween_interval(2)
-	else:
-		tween_idle_bank.kill()
-		tween_idle_pitch.kill()
+	
+	tween_idle_bank.set_loops()
+	tween_idle_pitch.set_loops()
+	var bank_amount : int = randi_range(min_bank_idle_amount, max_bank_idle_amount)
+	var pitch_amount : int = randi_range(min_pitch_amount, max_pitch_amount)
+	
+	tween_idle_bank.tween_property(csg_box_3d, "rotation_degrees:z", bank_amount, 3)
+	tween_idle_pitch.tween_property(csg_box_3d, "rotation_degrees:x", pitch_amount, 3)
+	
+	tween_idle_bank.tween_interval(0.1)
+	tween_idle_pitch.tween_interval(0.1)
+	
+	tween_idle_bank.tween_property(csg_box_3d, "rotation_degrees:z", 0, 3)
+	tween_idle_pitch.tween_property(csg_box_3d, "rotation_degrees:x", 0, 3)
+	
+	tween_idle_bank.tween_interval(2)
+	tween_idle_pitch.tween_interval(2)
+
 
 func attack_octupus() -> void:
+	attacking = true
+	Main.wave_manager.set_speed(Main.wave_manager.waves[0].max_speed)
+	await move_into_octopus()
 	if !Main.octopus.mouth_open:
 		Main.octopus.take_damage()
-		Main.wave_manager.set_speed(15)
+		Main.wave_manager.set_speed(Main.wave_manager.waves[0].start_speed)
+		move_back_to_start_pos()
+		current_lane = lanes.RIGHT
+		await Main.octopus.move_to_start()
 	else:
-		#die
-		pass
+		Main.die()
+	
+	attacking = false
+
+func move_into_octopus() -> void:
+	var tween : Tween = create_tween()
+	tween.tween_property(self, "global_position", octopus_hit_pos, 3)
+	await tween.finished
+
+func move_back_to_start_pos() -> void:
+	var tween : Tween = create_tween()
+	tween.tween_property(self, "global_position", start_pos, 3)
+	await tween.finished
 
 func move_lane(dir : Vector3) -> void:
+	moving = true
+	
 	var tween_move : Tween = create_tween()
 	var tween_bank : Tween = create_tween()
 	var tween_turn : Tween = create_tween()
@@ -81,10 +112,6 @@ func move_lane(dir : Vector3) -> void:
 	match current_lane:
 		lanes.LEFT:
 			match dir:
-				Vector3.MODEL_LEFT:
-					next_lane = lanes.LEFT
-					#attack_octupus()
-					pass
 				Vector3.MODEL_RIGHT:
 					next_lane = lanes.MIDDLE
 					move_dir = 15
@@ -113,13 +140,8 @@ func move_lane(dir : Vector3) -> void:
 					move_foward_dir = 10
 					turn_dir += randi_range(min_turn_amount ,max_turn_amount)
 					bank_dir += randi_range(min_bank_amount ,max_bank_amount)
-				Vector3.MODEL_RIGHT:
-					next_lane = lanes.RIGHT
-					#maybe hit side of board?
-					pass
 	
-	if next_lane != null && current_lane != next_lane:
-		moving = true
+	if next_lane != null:
 		var new_move = Vector3(move_dir, 0, move_foward_dir)
 		tween_move.tween_property(self, "global_position", new_move, 3)
 		
@@ -152,6 +174,7 @@ func move_lane(dir : Vector3) -> void:
 		tween_bank.chain().tween_property(csg_box_3d, "rotation_degrees:z", turn_normal_amount.z, 2)
 	
 		await tween_move.finished 
-		current_lane = next_lane
-		await tween_turn.finished
+		if global_position == new_move:
+			current_lane = next_lane
 		moving = false
+		await tween_turn.finished
