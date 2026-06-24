@@ -16,6 +16,7 @@
 [ext_resource type="Shader" uid="uid://dwub6ey157607" path="res://materials/shaders/Overcast.gdshader" id="11_svak4"]
 [ext_resource type="AudioStream" uid="uid://cytlfqh5hedtr" path="res://assets/audio/Torch_fire.ogg" id="14_6rdvi"]
 [ext_resource type="AudioStream" uid="uid://c4qm5n4wti1pp" path="res://assets/audio/SeaAmb_loop.ogg" id="16_5watb"]
+[ext_resource type="PackedScene" uid="uid://dpi37txa43siq" path="res://scenes/viking_ship.tscn" id="17_mspvw"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nuacq"]
 render_priority = 0
@@ -81,16 +82,16 @@ subdivide_depth = 100
 shader = ExtResource("11_svak4")
 shader_parameter/horizon_shift = -1.0
 shader_parameter/use_directional_light = false
-shader_parameter/sun_color = Color(1, 1, 1, 1)
-shader_parameter/sun_energy = 0.5
-shader_parameter/cloud_color = Color(0.152408, 0.22255915, 0.2975203, 1)
+shader_parameter/sun_color = Color(0.3882353, 0.41568628, 0.25882354, 1)
+shader_parameter/sun_energy = 1.0
+shader_parameter/cloud_color = Color(0.18899515, 0.27086967, 0.35733193, 1)
 shader_parameter/cloud_density = 5.0
 shader_parameter/cloud_depth = 5.0
 shader_parameter/cloud_sag = -0.09
 shader_parameter/noise_texture = ExtResource("2_mtf3i")
 shader_parameter/noise_tiling = Vector2(1, 1)
 shader_parameter/wind_speed = Vector2(0.5, 0.5)
-shader_parameter/ground_bottom_color = Color(0.2, 0.169, 0.133, 1)
+shader_parameter/ground_bottom_color = Color(1, 1, 1, 1)
 shader_parameter/ground_curve = 0.04
 shader_parameter/exposure = 1.0
 
@@ -100,32 +101,21 @@ radiance_size = 5
 
 [sub_resource type="Environment" id="Environment_p2yx8"]
 background_mode = 2
-background_energy_multiplier = 0.5
 sky = SubResource("Sky_4e08x")
 ambient_light_source = 2
 ambient_light_color = Color(0, 1, 0.4, 1)
 ambient_light_energy = 0.05
 reflected_light_source = 2
 tonemap_mode = 4
-tonemap_exposure = 0.85
-ssr_enabled = true
+tonemap_exposure = 0.95
+tonemap_agx_contrast = 1.1
 ssao_enabled = true
 glow_enabled = true
 fog_enabled = true
 fog_mode = 1
 fog_density = 1.0
-fog_aerial_perspective = 0.5
 fog_sky_affect = 0.5
 fog_height_density = -0.02
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_koej6"]
-albedo_color = Color(0.54833454, 0.4183686, 0.29037982, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_p2yx8"]
-size = Vector3(2.4345703, 0.40722656, 3.6933594)
-
-[sub_resource type="BoxMesh" id="BoxMesh_koej6"]
-size = Vector3(0.7910156, 0.20678711, 0.39672852)
 
 [sub_resource type="Curve" id="Curve_6vajx"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -457,28 +447,6 @@ process_priority = 1
 process_physics_priority = 1
 environment = SubResource("Environment_p2yx8")
 
-[node name="boat" type="Node3D" parent="." unique_id=2039607756]
-transform = Transform3D(0.38556075, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.009615421, -3.0335932)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="boat" unique_id=311501372]
-material_override = SubResource("StandardMaterial3D_koej6")
-mesh = SubResource("BoxMesh_p2yx8")
-
-[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="boat/MeshInstance3D" unique_id=768456132]
-size = Vector3(2, 0.40429688, 3.722412)
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="boat" unique_id=1224705044]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1838606, 1.9150038)
-material_override = SubResource("StandardMaterial3D_koej6")
-mesh = SubResource("BoxMesh_koej6")
-
-[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="boat/MeshInstance3D2" unique_id=487922425]
-size = Vector3(0.9501953, 0.2890625, 0.42797852)
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=908519243]
-transform = Transform3D(1, 0, 0, 0, 0.9659258, 0.25881904, 0, -0.25881904, 0.9659258, 0, 8.195269, 7.929345)
-sky_mode = 1
-
 [node name="wind" type="GPUParticles3D" parent="." unique_id=1608292953]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9145861, -8.088166)
 amount = 500
@@ -511,7 +479,7 @@ draw_pass_1 = SubResource("CapsuleMesh_epfrb")
 draw_pass_2 = SubResource("CapsuleMesh_w56ao")
 
 [node name="VFX_FireComp" type="Node3D" parent="." unique_id=1872676298]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.23700213, -4.8619614)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9209976, -6.702922)
 
 [node name="Fire" type="GPUParticles3D" parent="VFX_FireComp" unique_id=615067304]
 transform = Transform3D(0.38556075, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
@@ -557,3 +525,10 @@ metadata/_edit_use_anchors_ = true
 stream = ExtResource("16_5watb")
 volume_db = -16.0
 autoplay = true
+
+[node name="vikingShip" parent="." unique_id=1916623914 instance=ExtResource("17_mspvw")]
+transform = Transform3D(0.25618806, 0, 0, 0, 0.25618806, 0, 0, 0, 0.25618806, 0.059252262, 0.13124311, -3.313909)
+
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="vikingShip" unique_id=768456132]
+transform = Transform3D(1.504991, 0, 0, 0, 3.9033825, 0, 0, 0, 3.9033825, -0.64629585, 1.2306957, 0.108566284)
+size = Vector3(3.4509277, 0.6743164, 5.182495)
