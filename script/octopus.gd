@@ -18,7 +18,6 @@ var attacking : bool = false
 
 var mouth_open : bool = false
 var mouth_attack_timer : float = 0.0
-
 var amount_damage_per_hit : int = 50
 
 var starting_pos : Vector3

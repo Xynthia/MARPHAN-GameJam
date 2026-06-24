@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cbvjvo4xnm27j"]
 
 [ext_resource type="Script" uid="uid://cdjxl2t2sr755" path="res://script/tentacle.gd" id="1_spd53"]
+[ext_resource type="PackedScene" uid="uid://cgij23vbylaaa" path="res://scenes/tenatcle_model.tscn" id="2_tfhu0"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ounal"]
 vertex_color_use_as_albedo = true
@@ -17,5 +18,8 @@ material = SubResource("StandardMaterial3D_ounal")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=580810932]
 shape = SubResource("BoxShape3D_yuwuw")
+
+[node name="Tenatcle" parent="." unique_id=161717197 instance=ExtResource("2_tfhu0")]
+transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 0, 0)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

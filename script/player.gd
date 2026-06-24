@@ -1,7 +1,7 @@
 class_name Player
 extends CharacterBody3D
 
-@onready var csg_box_3d: CSGBox3D = $CSGBox3D
+@onready var viking_ship: Node3D = $vikingShip
 @onready var collision_shape_3d: CollisionShape3D = $CollisionShape3D
 
 enum lanes {LEFT, MIDDLE, RIGHT}
@@ -56,14 +56,14 @@ func animation_idle() -> void:
 	var bank_amount : int = randi_range(min_bank_idle_amount, max_bank_idle_amount)
 	var pitch_amount : int = randi_range(min_pitch_amount, max_pitch_amount)
 	
-	tween_idle_bank.tween_property(csg_box_3d, "rotation_degrees:z", bank_amount, 3)
-	tween_idle_pitch.tween_property(csg_box_3d, "rotation_degrees:x", pitch_amount, 3)
+	tween_idle_bank.tween_property(viking_ship, "rotation_degrees:z", bank_amount, 3)
+	tween_idle_pitch.tween_property(viking_ship, "rotation_degrees:x", pitch_amount, 3)
 	
 	tween_idle_bank.tween_interval(0.1)
 	tween_idle_pitch.tween_interval(0.1)
 	
-	tween_idle_bank.tween_property(csg_box_3d, "rotation_degrees:z", 0, 3)
-	tween_idle_pitch.tween_property(csg_box_3d, "rotation_degrees:x", 0, 3)
+	tween_idle_bank.tween_property(viking_ship, "rotation_degrees:z", 0, 3)
+	tween_idle_pitch.tween_property(viking_ship, "rotation_degrees:x", 0, 3)
 	
 	tween_idle_bank.tween_interval(2)
 	tween_idle_pitch.tween_interval(2)
@@ -147,31 +147,31 @@ func move_lane(dir : Vector3) -> void:
 		
 		tween_pitch.set_ease(Tween.EASE_IN)
 		tween_pitch.set_trans(Tween.TRANS_BOUNCE)
-		tween_pitch.tween_property(csg_box_3d, "rotation_degrees:x", pitch_amount, 3)
+		tween_pitch.tween_property(viking_ship, "rotation_degrees:x", pitch_amount, 3)
 		tween_pitch.set_ease(Tween.EASE_OUT)
-		tween_pitch.chain().tween_property(csg_box_3d, "rotation_degrees:x", 0, 3)
+		tween_pitch.chain().tween_property(viking_ship, "rotation_degrees:x", 0, 3)
 	
 		tween_turn.set_trans(Tween.TRANS_BACK)
 		# turn left
 		tween_turn.set_ease(Tween.EASE_OUT)
-		tween_turn.tween_property(csg_box_3d, "rotation_degrees:y", turn_dir, 2)
+		tween_turn.tween_property(viking_ship, "rotation_degrees:y", turn_dir, 2)
 		#turn right
 		tween_turn.set_ease(Tween.EASE_IN)
-		tween_turn.chain().tween_property(csg_box_3d, "rotation_degrees:y", -turn_dir /2, 2)
+		tween_turn.chain().tween_property(viking_ship, "rotation_degrees:y", -turn_dir /2, 2)
 		#return
 		tween_turn.set_ease(Tween.EASE_OUT_IN)
-		tween_turn.chain().tween_property(csg_box_3d, "rotation_degrees:y", turn_normal_amount.y, 2)
+		tween_turn.chain().tween_property(viking_ship, "rotation_degrees:y", turn_normal_amount.y, 2)
 	
 		tween_bank.set_trans(Tween.TRANS_BACK)
 		# turn left
 		tween_bank.set_ease(Tween.EASE_OUT)
-		tween_bank.tween_property(csg_box_3d, "rotation_degrees:z", bank_dir, 2)
+		tween_bank.tween_property(viking_ship, "rotation_degrees:z", bank_dir, 2)
 		#turn right
 		tween_bank.set_ease(Tween.EASE_IN)
-		tween_bank.chain().tween_property(csg_box_3d, "rotation_degrees:z", -bank_dir /2, 2)
+		tween_bank.chain().tween_property(viking_ship, "rotation_degrees:z", -bank_dir /2, 2)
 		#return
 		tween_bank.set_ease(Tween.EASE_OUT_IN)
-		tween_bank.chain().tween_property(csg_box_3d, "rotation_degrees:z", turn_normal_amount.z, 2)
+		tween_bank.chain().tween_property(viking_ship, "rotation_degrees:z", turn_normal_amount.z, 2)
 	
 		await tween_move.finished 
 		if global_position == new_move:

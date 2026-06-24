@@ -4,6 +4,10 @@ extends Area3D
 var parent : PathFollow3D
 var amount_speed_up : int = 10
 
+const RUNE_BUFFACTIVE = preload("uid://dyb3iep4i8rty")
+const RUNE_PICKUP = preload("uid://hltsntomnxd5")
+
+
 func _ready() -> void:
 	parent = get_parent()
 

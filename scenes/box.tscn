@@ -18,4 +18,7 @@ material_override = SubResource("StandardMaterial3D_swqr5")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1188238682]
 shape = SubResource("BoxShape3D_24de5")
 
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=542956672]
+bus = &"SFX obsticle"
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
