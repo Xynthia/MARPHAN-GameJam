@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://iomq5as5lapg"
-path.s3tc="res://.godot/imported/T_VFX_Glow_1.PNG-f2911cfb2c07ba3e9448e4e73b2fb09b.s3tc.ctex"
+uid="uid://5dhudphm5c8o"
+path.s3tc="res://.godot/imported/foam_albedo.png-c3e78f0fbe3e49d44886a56e86fd70e4.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/images/T_VFX_Glow_1.PNG"
-dest_files=["res://.godot/imported/T_VFX_Glow_1.PNG-f2911cfb2c07ba3e9448e4e73b2fb09b.s3tc.ctex"]
+source_file="res://assets/textures/waves/foam_albedo.png"
+dest_files=["res://.godot/imported/foam_albedo.png-c3e78f0fbe3e49d44886a56e86fd70e4.s3tc.ctex"]
 
 [params]
 
@@ -22,7 +22,7 @@ compress/lossy_quality=0.7
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
-compress/normal_map=1
+compress/normal_map=0
 compress/channel_pack=0
 mipmaps/generate=true
 mipmaps/limit=-1

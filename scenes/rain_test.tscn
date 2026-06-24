@@ -1,9 +1,122 @@
 [gd_scene format=3 uid="uid://6vxr6p0dqd3w"]
 
+[ext_resource type="Shader" uid="uid://bk2tw5fyhtui8" path="res://materials/shaders/glassRain_Canvas.gdshader" id="1_mtf3i"]
+[ext_resource type="Texture2D" uid="uid://cho1hcpqcl0ef" path="res://assets/textures/waves/836f54b5ec6effccfe450922f05ed3fdc8013bc8.jpeg" id="2_mtf3i"]
 [ext_resource type="Material" uid="uid://mbeanljs7j8i" path="res://materials/rain_drop.material" id="2_nk4tp"]
+[ext_resource type="CompressedTexture2DArray" uid="uid://dcvujep4v7k1b" path="res://assets/textures/waves/caustic.png" id="3_3fv0k"]
 [ext_resource type="Material" uid="uid://cmswens1io2l6" path="res://materials/rain_drop_billboard.material" id="3_5i34o"]
 [ext_resource type="Texture2D" uid="uid://c3j8qdw6uh4x7" path="res://assets/images/T_fire01.png" id="3_uchyq"]
+[ext_resource type="Texture2D" uid="uid://5dhudphm5c8o" path="res://assets/textures/waves/foam_albedo.png" id="4_4e08x"]
 [ext_resource type="Texture2D" uid="uid://iomq5as5lapg" path="res://assets/images/T_VFX_Glow_1.PNG" id="4_qxd88"]
+[ext_resource type="Texture2D" uid="uid://bfa4xeh5thwio" path="res://assets/textures/waves/normal_A.png" id="5_svak4"]
+[ext_resource type="Shader" uid="uid://dsqelj8u1skim" path="res://materials/shaders/Waves.gdshader" id="6_epfrb"]
+[ext_resource type="Texture2D" uid="uid://dpwv0qf6tb7we" path="res://assets/textures/waves/normal_B.png" id="6_mtf3i"]
+[ext_resource type="Texture2D" uid="uid://ch1eb1v8e4utn" path="res://assets/textures/waves/uv_example.png" id="7_6rdvi"]
+[ext_resource type="Texture2D" uid="uid://rxd4g2s7ctk0" path="res://assets/images/Circle.png" id="8_4e08x"]
+[ext_resource type="Shader" uid="uid://dwub6ey157607" path="res://materials/shaders/Overcast.gdshader" id="11_svak4"]
+[ext_resource type="AudioStream" uid="uid://cytlfqh5hedtr" path="res://assets/audio/Torch_fire.ogg" id="14_6rdvi"]
+[ext_resource type="AudioStream" uid="uid://c4qm5n4wti1pp" path="res://assets/audio/SeaAmb_loop.ogg" id="16_5watb"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nuacq"]
+render_priority = 0
+shader = ExtResource("6_epfrb")
+shader_parameter/wave_1 = Vector4(0.3, 4, 0.2, 1)
+shader_parameter/wave_2 = Vector4(-0.26, -0.19, 0.01, 2)
+shader_parameter/wave_3 = Vector4(-7.67, 5.63, 0.1, 3)
+shader_parameter/wave_4 = Vector4(-0.42, -1.63, 0.1, 4)
+shader_parameter/wave_5 = Vector4(1.66, 0.07, 0.15, 5)
+shader_parameter/wave_6 = Vector4(1.2, 1.14, 0.01, 1)
+shader_parameter/wave_7 = Vector4(-1.6, 7.3, 0.11, 2)
+shader_parameter/wave_8 = Vector4(-0.42, -1.63, 0.15, 3)
+shader_parameter/time_factor = 2.5
+shader_parameter/noise_zoom = 2.0
+shader_parameter/noise_amp = 1.0
+shader_parameter/base_water_color = Color(0.70980394, 0.827451, 0.8352941, 1)
+shader_parameter/fresnel_water_color = Color(0.35686275, 0.7176471, 0.74509805, 1)
+shader_parameter/deep_water_color = Color(0.05490196, 0.12941177, 0.19607843, 1)
+shader_parameter/shallow_water_color = Color(0.12941177, 0.6313726, 0.6666667, 1)
+shader_parameter/beers_law = 0.5
+shader_parameter/depth_offset = -1.2
+shader_parameter/near = 7.0
+shader_parameter/far = 10000.0
+shader_parameter/edge_texture_scale = 3.5
+shader_parameter/edge_texture_offset = 1.0
+shader_parameter/edge_texture_speed = 0.1
+shader_parameter/edge_foam_intensity = 2.0
+shader_parameter/edge_fade_start = -3.0
+shader_parameter/edge_fade_end = 6.6
+shader_parameter/edge_foam_texture = ExtResource("4_4e08x")
+shader_parameter/peak_height_threshold = 1.0
+shader_parameter/peak_color = Vector3(1, 1, 1)
+shader_parameter/peak_intensity = 1.0
+shader_parameter/foam_texture = ExtResource("4_4e08x")
+shader_parameter/foam_intensity = 1.0
+shader_parameter/foam_scale = 1.0
+shader_parameter/metallic = 0.6
+shader_parameter/roughness = 0.045
+shader_parameter/uv_scale_text_a = 0.1
+shader_parameter/uv_speed_text_a = Vector2(0.42, 0.3)
+shader_parameter/uv_scale_text_b = 0.6
+shader_parameter/uv_speed_text_b = Vector2(0.15, 0.1)
+shader_parameter/normal_strength = 1.0
+shader_parameter/uv_sampler_scale = 0.3
+shader_parameter/blend_factor = 0.28
+shader_parameter/perturbation_strength = 1.0
+shader_parameter/perturbation_time = 0.3
+shader_parameter/normalmap_a = ExtResource("5_svak4")
+shader_parameter/normalmap_b = ExtResource("6_mtf3i")
+shader_parameter/uv_sampler = ExtResource("7_6rdvi")
+shader_parameter/caustic_sampler = ExtResource("3_3fv0k")
+shader_parameter/caustics_intensity = 15.0
+shader_parameter/num_caustic_layers = 16.0
+shader_parameter/caustic_distortion_strength = 0.001
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_p2yx8"]
+material = SubResource("ShaderMaterial_nuacq")
+size = Vector2(100, 100)
+subdivide_width = 100
+subdivide_depth = 100
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_svak4"]
+shader = ExtResource("11_svak4")
+shader_parameter/horizon_shift = -1.0
+shader_parameter/use_directional_light = false
+shader_parameter/sun_color = Color(1, 1, 1, 1)
+shader_parameter/sun_energy = 0.5
+shader_parameter/cloud_color = Color(0.152408, 0.22255915, 0.2975203, 1)
+shader_parameter/cloud_density = 5.0
+shader_parameter/cloud_depth = 5.0
+shader_parameter/cloud_sag = -0.09
+shader_parameter/noise_texture = ExtResource("2_mtf3i")
+shader_parameter/noise_tiling = Vector2(1, 1)
+shader_parameter/wind_speed = Vector2(0.5, 0.5)
+shader_parameter/ground_bottom_color = Color(0.2, 0.169, 0.133, 1)
+shader_parameter/ground_curve = 0.04
+shader_parameter/exposure = 1.0
+
+[sub_resource type="Sky" id="Sky_4e08x"]
+sky_material = SubResource("ShaderMaterial_svak4")
+radiance_size = 5
+
+[sub_resource type="Environment" id="Environment_p2yx8"]
+background_mode = 2
+background_energy_multiplier = 0.5
+sky = SubResource("Sky_4e08x")
+ambient_light_source = 2
+ambient_light_color = Color(0, 1, 0.4, 1)
+ambient_light_energy = 0.05
+reflected_light_source = 2
+tonemap_mode = 4
+tonemap_exposure = 0.85
+ssr_enabled = true
+ssao_enabled = true
+glow_enabled = true
+fog_enabled = true
+fog_mode = 1
+fog_density = 1.0
+fog_aerial_perspective = 0.5
+fog_sky_affect = 0.5
+fog_height_density = -0.02
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_koej6"]
 albedo_color = Color(0.54833454, 0.4183686, 0.29037982, 1)
@@ -13,6 +126,83 @@ size = Vector3(2.4345703, 0.40722656, 3.6933594)
 
 [sub_resource type="BoxMesh" id="BoxMesh_koej6"]
 size = Vector3(0.7910156, 0.20678711, 0.39672852)
+
+[sub_resource type="Curve" id="Curve_6vajx"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_6vajx"]
+curve = SubResource("Curve_6vajx")
+
+[sub_resource type="Gradient" id="Gradient_3fv0k"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.2849741, 0.60362697, 0.91709846)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_30xnh"]
+gradient = SubResource("Gradient_3fv0k")
+
+[sub_resource type="Curve" id="Curve_g34s0"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_gul0u"]
+curve_z = SubResource("Curve_g34s0")
+
+[sub_resource type="Curve" id="Curve_4e08x"]
+_data = [Vector2(0, 0), 0.0, 1.4, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_0fxrv"]
+curve = SubResource("Curve_4e08x")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3fv0k"]
+particle_flag_align_y = true
+particle_flag_damping_as_friction = true
+emission_shape_scale = Vector3(3, 7, 25)
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 1.0
+emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 90.0
+directional_velocity_min = 0.9999839
+directional_velocity_max = 49.99998
+directional_velocity_curve = SubResource("CurveXYZTexture_gul0u")
+gravity = Vector3(0, 0, 0)
+scale_min = 0.29999998
+scale_max = 1.3
+scale_curve = SubResource("CurveTexture_0fxrv")
+color_ramp = SubResource("GradientTexture1D_30xnh")
+alpha_curve = SubResource("CurveTexture_6vajx")
+turbulence_enabled = true
+turbulence_noise_speed = Vector3(3, 1, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_svak4"]
+render_priority = 3
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+refraction_texture = ExtResource("8_4e08x")
+grow = true
+stencil_flags = 2
+stencil_reference = 2
+stencil_color = Color(0.05490196, 0.12941177, 0.19607843, 1)
+stencil_outline_thickness = 0.003
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_qxd88"]
+material = SubResource("StandardMaterial3D_svak4")
+radius = 0.007
+height = 0.3
+radial_segments = 4
+rings = 1
+
+[sub_resource type="Curve" id="Curve_6rdvi"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_mtf3i"]
+curve = SubResource("Curve_6rdvi")
 
 [sub_resource type="Curve" id="Curve_nk4tp"]
 _limits = [0.0, 20.0, 0.0, 1.0]
@@ -35,16 +225,27 @@ directional_velocity_min = 1.0
 directional_velocity_max = 1.0
 directional_velocity_curve = SubResource("CurveXYZTexture_koej6")
 gravity = Vector3(0, -15, 0)
+alpha_curve = SubResource("CurveTexture_mtf3i")
 turbulence_noise_strength = 0.1
 turbulence_noise_speed_random = 4.0
 collision_mode = 2
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_qxd88"]
-material = ExtResource("2_nk4tp")
-radius = 0.005
-height = 0.2
-radial_segments = 4
-rings = 1
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6rdvi"]
+render_priority = 1
+transparency = 1
+shading_mode = 0
+vertex_color_is_srgb = true
+albedo_color = Color(1, 0, 0, 1)
+refraction_texture = ExtResource("8_4e08x")
+stencil_flags = 2
+stencil_reference = 2
+stencil_color = Color(0.05490196, 0.12941177, 0.19607843, 1)
+stencil_outline_thickness = 0.003
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_5watb"]
+material = SubResource("StandardMaterial3D_6rdvi")
+radius = 0.001
+height = 0.05
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_nk4tp"]
 material = ExtResource("2_nk4tp")
@@ -78,13 +279,8 @@ height = 0.75
 radial_segments = 4
 rings = 1
 
-[sub_resource type="Environment" id="Environment_p2yx8"]
-background_mode = 2
-ambient_light_source = 3
-ambient_light_color = Color(1, 1, 1, 1)
-volumetric_fog_enabled = true
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dptgm"]
+render_priority = 1
 transparency = 1
 shading_mode = 0
 vertex_color_use_as_albedo = true
@@ -112,6 +308,13 @@ colors = PackedColorArray(1, 1, 1, 1, 0.62, 0.2852, 0.2852, 1, 0.1148968, 0.1148
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_c8h6i"]
 gradient = SubResource("Gradient_epfrb")
 
+[sub_resource type="Curve" id="Curve_5watb"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_mtf3i"]
+curve_z = SubResource("Curve_5watb")
+
 [sub_resource type="Curve" id="Curve_vex6r"]
 _data = [Vector2(0, 0.50561804), 0.0, 0.99413884, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
@@ -121,7 +324,9 @@ curve = SubResource("Curve_vex6r")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nuacq"]
 lifetime_randomness = 0.08
+particle_flag_align_y = true
 particle_flag_rotate_y = true
+particle_flag_damping_as_friction = true
 emission_shape_scale = Vector3(0.2, 0.2, 0.2)
 emission_shape = 1
 emission_sphere_radius = 1.0
@@ -131,6 +336,9 @@ direction = Vector3(0, 1, 0)
 spread = 15.0
 initial_velocity_min = 1.0
 initial_velocity_max = 2.0
+directional_velocity_min = 0.9999839
+directional_velocity_max = 2.9999838
+directional_velocity_curve = SubResource("CurveXYZTexture_mtf3i")
 radial_velocity_min = -2.2351742e-05
 radial_velocity_max = 0.49997765
 gravity = Vector3(0, 1, 0)
@@ -144,7 +352,7 @@ alpha_curve = SubResource("CurveTexture_msg8v")
 [sub_resource type="QuadMesh" id="QuadMesh_p2yx8"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_msg8v"]
-render_priority = 1
+render_priority = 2
 blend_mode = 1
 shading_mode = 0
 vertex_color_use_as_albedo = true
@@ -156,6 +364,13 @@ billboard_keep_scale = true
 particles_anim_h_frames = 1
 particles_anim_v_frames = 1
 particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_mtf3i"]
+_data = [Vector2(0, 0), 0.0, 1.4, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_mspvw"]
+curve_z = SubResource("Curve_mtf3i")
 
 [sub_resource type="Curve" id="Curve_w56ao"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.08744393, 0.86813176), 0.0, 0.0, 0, 0, Vector2(0.17040357, 1), 0.0, 0.0, 0, 0, Vector2(0.25336322, 0.8901098), 0.0, 0.0, 0, 0, Vector2(0.36547086, 1), 0.0, 0.0, 0, 0, Vector2(0.40807173, 0.8791208), 0.0, 0.0, 0, 0, Vector2(0.49327353, 1), 0.0, 0.0, 0, 0, Vector2(0.57623315, 0.8571428), 0.0, 0.0, 0, 0, Vector2(0.647982, 0.9835164), 0.0, 0.0, 0, 0, Vector2(0.74439454, 0.8351648), 0.0, 0.0, 0, 0, Vector2(0.85426, 0.9999999), 0.0, 0.0, 0, 0, Vector2(0.9260089, 0.8901098), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -171,9 +386,12 @@ emission_ring_height = 0.8
 emission_ring_radius = 0.6
 emission_ring_inner_radius = 0.4
 emission_ring_cone_angle = 90.0
-spread = 15.0
+spread = 5.0
 initial_velocity_min = 0.5
 initial_velocity_max = 2.0
+directional_velocity_min = 0.9999839
+directional_velocity_max = 3.0
+directional_velocity_curve = SubResource("CurveXYZTexture_mspvw")
 gravity = Vector3(0, 1, 0)
 scale_min = 0.04
 scale_max = 0.089999996
@@ -218,32 +436,59 @@ _data = {
 &"blink": SubResource("Animation_1cm3p")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6rdvi"]
+shader = ExtResource("1_mtf3i")
+shader_parameter/frequency = 0.10000015050212065
+shader_parameter/size = 0.0370000017575
+
 [node name="RainTest" type="Node3D" unique_id=1358232770]
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1585590648]
-transform = Transform3D(1, 0, 0, 0, 0.9659258, 0.25881904, 0, -0.25881904, 0.9659258, 0, 2, 2)
+transform = Transform3D(0.99999046, -0.00020934598, 0.0043583373, 0, 0.9988484, 0.047978133, -0.004363362, -0.047977675, 0.99883884, -1.8775038, 1.5800247, 2.929294)
 keep_aspect = 0
-fov = 70.0
+fov = 79.3662
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=311501372]
+[node name="Waves" type="MeshInstance3D" parent="." unique_id=1680918679]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -0.0060346127, -0.13429338, -3.0411808)
+mesh = SubResource("PlaneMesh_p2yx8")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=313144861]
+process_priority = 1
+process_physics_priority = 1
+environment = SubResource("Environment_p2yx8")
+
+[node name="boat" type="Node3D" parent="." unique_id=2039607756]
 transform = Transform3D(0.38556075, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.009615421, -3.0335932)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="boat" unique_id=311501372]
 material_override = SubResource("StandardMaterial3D_koej6")
 mesh = SubResource("BoxMesh_p2yx8")
 
-[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="MeshInstance3D" unique_id=768456132]
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="boat/MeshInstance3D" unique_id=768456132]
 size = Vector3(2, 0.40429688, 3.722412)
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1224705044]
-transform = Transform3D(0.38556075, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.17424518, -1.1185894)
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="boat" unique_id=1224705044]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1838606, 1.9150038)
 material_override = SubResource("StandardMaterial3D_koej6")
 mesh = SubResource("BoxMesh_koej6")
 
-[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="MeshInstance3D2" unique_id=487922425]
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="boat/MeshInstance3D2" unique_id=487922425]
 size = Vector3(0.9501953, 0.2890625, 0.42797852)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=908519243]
 transform = Transform3D(1, 0, 0, 0, 0.9659258, 0.25881904, 0, -0.25881904, 0.9659258, 0, 8.195269, 7.929345)
 sky_mode = 1
+
+[node name="wind" type="GPUParticles3D" parent="." unique_id=1608292953]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9145861, -8.088166)
+amount = 500
+lifetime = 3.0
+randomness = 0.3
+trail_lifetime = 0.2
+process_material = SubResource("ParticleProcessMaterial_3fv0k")
+draw_passes = 2
+draw_pass_1 = SubResource("CapsuleMesh_qxd88")
+draw_pass_2 = null
 
 [node name="rain" type="GPUParticles3D" parent="." unique_id=1242865541]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.081709, -17.670517)
@@ -252,7 +497,7 @@ randomness = 0.6
 trail_lifetime = 0.2
 process_material = SubResource("ParticleProcessMaterial_p2yx8")
 draw_passes = 2
-draw_pass_1 = SubResource("CapsuleMesh_qxd88")
+draw_pass_1 = SubResource("CapsuleMesh_5watb")
 draw_pass_2 = SubResource("CapsuleMesh_nk4tp")
 
 [node name="rain_Billboard" type="GPUParticles3D" parent="." unique_id=2004495949]
@@ -265,17 +510,13 @@ draw_passes = 2
 draw_pass_1 = SubResource("CapsuleMesh_epfrb")
 draw_pass_2 = SubResource("CapsuleMesh_w56ao")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=313144861]
-environment = SubResource("Environment_p2yx8")
-
 [node name="VFX_FireComp" type="Node3D" parent="." unique_id=1872676298]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.23700213, -4.8619614)
 
 [node name="Fire" type="GPUParticles3D" parent="VFX_FireComp" unique_id=615067304]
 transform = Transform3D(0.38556075, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_dptgm")
-amount = 50
-lifetime = 1.2
+amount = 25
 process_material = SubResource("ParticleProcessMaterial_nuacq")
 draw_pass_1 = SubResource("QuadMesh_p2yx8")
 
@@ -295,3 +536,24 @@ light_energy = 2.8
 root_node = NodePath("../OmniLight3D")
 libraries/ = SubResource("AnimationLibrary_3fv0k")
 autoplay = &"blink"
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="VFX_FireComp" unique_id=581207254]
+stream = ExtResource("14_6rdvi")
+unit_size = 2.0
+autoplay = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1516608864]
+
+[node name="GlassRain" type="ColorRect" parent="CanvasLayer" unique_id=1852343346]
+material = SubResource("ShaderMaterial_6rdvi")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="SFX_Amb_Sea" type="AudioStreamPlayer2D" parent="." unique_id=1710480906]
+stream = ExtResource("16_5watb")
+volume_db = -16.0
+autoplay = true
