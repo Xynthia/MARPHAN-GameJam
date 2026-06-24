@@ -6,7 +6,7 @@
 shader_type spatial;
 
 // Set render modes: always draw depth and disable backface culling
-render_mode depth_draw_always, cull_disabled;
+render_mode depth_draw_always, cull_disabled, specular_toon, diffuse_toon;
 
 // Uniforms for screen and depth textures
 uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_linear_mipmap;
