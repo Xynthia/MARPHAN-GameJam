@@ -230,17 +230,12 @@ transform = Transform3D(1, 0, -1.7484555e-07, 0, 1, 0, 1.7484555e-07, 0, 1, 20, 
 mesh = SubResource("PlaneMesh_bhx41")
 
 [node name="Waves_V2" type="MeshInstance3D" parent="." unique_id=505884145]
-transform = Transform3D(1, 0, -1.7484555e-07, 0, 1, 0, 1.7484555e-07, 0, 1, 19.891, 0.4, 14.882)
+transform = Transform3D(1, 0, -1.7484555e-07, 0, 1, 0, 1.7484555e-07, 0, 1, 19.9504, 0.4, 14.901014)
 mesh = SubResource("PlaneMesh_sww3w")
 
 [node name="FoamScript" type="Node3D" parent="Waves_V2" unique_id=1858686668 node_paths=PackedStringArray("tracked_objects")]
 script = ExtResource("6_qnb83")
-tracked_objects = [NodePath("../../Player/FoamPoint_1"), NodePath("../../Player/FoamPoint_2")]
-
-[node name="FoamScript2" type="Node3D" parent="Waves_V2" unique_id=848258922 node_paths=PackedStringArray("tracked_objects")]
-script = ExtResource("6_qnb83")
-tracked_objects = [NodePath("../../Octopus")]
-foam_radius = 2.0
+tracked_objects = [NodePath("../../Player/FoamPoint_1"), NodePath("../../Player/FoamPoint_2"), NodePath("../../Octopus")]
 
 [node name="Player" parent="." unique_id=699919053 instance=ExtResource("2_vtaks")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 1, 15)
