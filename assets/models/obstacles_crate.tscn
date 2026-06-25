@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://cvtjk1cm1jtcr"]
+
+[ext_resource type="PackedScene" uid="uid://c6np1htreny7d" path="res://assets/models/obstacles_crate.fbx" id="1_3eqcj"]
+[ext_resource type="Material" uid="uid://bi2f315lki4m2" path="res://materials/ObstaclesMat.tres" id="2_m7kou"]
+
+[node name="obstacles_crate" unique_id=297988467 instance=ExtResource("1_3eqcj")]
+
+[node name="Cube_002" parent="." index="0" unique_id=83265467]
+surface_material_override/0 = ExtResource("2_m7kou")

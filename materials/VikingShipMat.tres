@@ -1,0 +1,15 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://db86qmm1jr4vc"]
+
+[ext_resource type="Texture2D" uid="uid://d3elly04ug8m7" path="res://assets/models/shiptextures/vikingShip1_DefaultMaterial_BaseColor.png" id="1_bj3mj"]
+[ext_resource type="Texture2D" uid="uid://mnkmtmgxoy1d" path="res://assets/models/shiptextures/vikingShip1_DefaultMaterial_Emissive.png" id="2_fp31h"]
+[ext_resource type="Texture2D" uid="uid://28figcp2pc8q" path="res://assets/models/shiptextures/vikingShip1_DefaultMaterial_Normal.png" id="3_woenf"]
+[ext_resource type="Texture2D" uid="uid://wgdkhdd2b6mf" path="res://assets/models/shiptextures/vikingShip1_DefaultMaterial_OcclusionRoughnessMetallic.png" id="4_1dfye"]
+
+[resource]
+albedo_texture = ExtResource("1_bj3mj")
+roughness_texture = ExtResource("4_1dfye")
+emission_enabled = true
+emission_texture = ExtResource("2_fp31h")
+normal_enabled = true
+normal_texture = ExtResource("3_woenf")
+bent_normal_enabled = true
