@@ -15,6 +15,7 @@ run/main_scene="uid://bo1if15fmshyn"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 run/max_fps=60
 config/icon="uid://cufll31wk1edb"
+config/windows_native_icon="res://assets/logo/MARPHAN_WS_ico.ico"
 
 [autoload]
 

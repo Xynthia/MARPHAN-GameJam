@@ -1,8 +1,13 @@
 class_name Player
 extends CharacterBody3D
 
+const BOAT_RAM_AFTERMATH = preload("uid://cyu4ae57i0t7x")
+const BOAT_RAM_HIT = preload("uid://dvpv3rqk66jw3")
+
+
 @onready var viking_ship: Node3D = $vikingShip
 @onready var collision_shape_3d: CollisionShape3D = $CollisionShape3D
+@onready var sfx: AudioStreamPlayer3D = $SFX
 
 enum lanes {LEFT, MIDDLE, RIGHT}
 var current_lane : lanes = lanes.RIGHT
@@ -37,8 +42,6 @@ func _ready() -> void:
 	start_pos = global_position
 
 func _input(event: InputEvent) -> void:
-	print(moving)
-	
 	if event.is_action_pressed("ramming") && Main.octopus.is_in_middle_pos && !attacking:
 		attack_octupus()
 	
@@ -46,6 +49,15 @@ func _input(event: InputEvent) -> void:
 		move_lane(Vector3.MODEL_LEFT)
 	if event.is_action_pressed("move right") && !moving:
 		move_lane(Vector3.MODEL_RIGHT)
+
+func play_audio_hit() -> void:
+	sfx.stream = BOAT_RAM_HIT
+	sfx.play()
+	await sfx.finished
+	get_tree().create_timer(0.3)
+	sfx.stream = BOAT_RAM_AFTERMATH
+	sfx.play()
+	await sfx.finished
 
 func animation_idle() -> void:
 	var tween_idle_bank : Tween = create_tween()
@@ -73,6 +85,7 @@ func attack_octupus() -> void:
 	attacking = true
 	Main.wave_manager.set_speed(Main.wave_manager.waves[0].max_speed)
 	await move_into_octopus()
+	play_audio_hit()
 	if !Main.octopus.mouth_open:
 		Main.octopus.take_damage()
 		Main.wave_manager.set_speed(Main.wave_manager.waves[0].start_speed)

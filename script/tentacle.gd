@@ -4,6 +4,10 @@ extends Area3D
 var parent : PathFollow3D
 var amount_slow_down : int = -10
 
+const TENTACLE_EMERGE = preload("uid://drd08pgxjak22")
+const TENTACLE_HIT_BOAT = preload("uid://bwf2nk4n2go71")
+const TENTACLE_HIT_WATER_MISS = preload("uid://kecvv4rewfjp")
+
 func _ready() -> void:
 	parent = get_parent()
 
