@@ -2,6 +2,9 @@
 
 [ext_resource type="Script" uid="uid://3kowtepeef6s" path="res://script/ui.gd" id="1_x4jx1"]
 [ext_resource type="Texture2D" uid="uid://d0o04ajqrp0d0" path="res://icon.svg" id="2_yev5y"]
+[ext_resource type="AudioStream" uid="uid://ciqxayb341ie2" path="res://assets/audio/SFX_Pickup.wav" id="3_gdt2y"]
+[ext_resource type="Texture2D" uid="uid://dklpbuk4g56t" path="res://assets/images/SettingsIcon.svg" id="3_wm3ai"]
+[ext_resource type="AudioStream" uid="uid://cceoagcy87uu1" path="res://assets/audio/SFX_Return_False.wav" id="4_wm3ai"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tipki"]
 content_margin_left = 2.0
@@ -50,6 +53,17 @@ corner_radius_top_right = 6
 corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
 corner_detail = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x4jx1"]
+bg_color = Color(0.262932, 0.262932, 0.262932, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
 [node name="UI" type="Control" unique_id=990566653]
 process_mode = 3
@@ -143,7 +157,6 @@ theme_override_styles/background = SubResource("StyleBoxFlat_choun")
 theme_override_styles/fill = SubResource("StyleBoxFlat_ya4ey")
 max_value = 50.0
 value = 15.0
-rounded = true
 show_percentage = false
 
 [node name="GameChange" type="Panel" parent="." unique_id=1779493643]
@@ -225,4 +238,130 @@ uppercase = true
 layout_mode = 2
 text = "START"
 
+[node name="Settings_button" type="Button" parent="." unique_id=72721753]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 20.0
+offset_right = 1699.0
+offset_bottom = 1694.0
+scale = Vector2(0.02, 0.02)
+size_flags_horizontal = 6
+size_flags_vertical = 6
+theme_override_styles/normal = SubResource("StyleBoxFlat_x4jx1")
+icon = ExtResource("3_wm3ai")
+
+[node name="SfxClick" type="AudioStreamPlayer" parent="." unique_id=818416569]
+stream = ExtResource("3_gdt2y")
+bus = &"SFX"
+
+[node name="SfxReturn" type="AudioStreamPlayer" parent="." unique_id=393197755]
+stream = ExtResource("4_wm3ai")
+bus = &"SFX"
+
+[node name="Settings_menu" type="Control" parent="." unique_id=1621554129]
+anchors_preset = 0
+
+[node name="Smenu" type="Control" parent="Settings_menu" unique_id=2122553299]
+anchors_preset = 0
+offset_left = 315.0
+offset_top = 185.0
+offset_right = 355.0
+offset_bottom = 225.0
+
+[node name="Panel" type="Panel" parent="Settings_menu/Smenu" unique_id=680299087]
+layout_mode = 0
+offset_left = -2.0
+offset_top = 1.0
+offset_right = 697.0
+offset_bottom = 335.0
+
+[node name="Header" type="RichTextLabel" parent="Settings_menu/Smenu" unique_id=1990847079]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -5.0
+offset_top = 12.0
+offset_right = 124.0
+offset_bottom = 46.0
+grow_horizontal = 2
+theme_override_font_sizes/normal_font_size = 24
+text = "SETTINGS"
+fit_content = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Settings_menu/Smenu" unique_id=1832631537]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 55.0
+offset_right = 680.0
+offset_bottom = 434.0
+theme_override_constants/separation = 10
+
+[node name="MusicText" type="RichTextLabel" parent="Settings_menu/Smenu/VBoxContainer" unique_id=1587839110]
+layout_mode = 2
+text = "| Music volume"
+fit_content = true
+
+[node name="MusicVolume" type="HSlider" parent="Settings_menu/Smenu/VBoxContainer" unique_id=1473386887]
+layout_mode = 2
+max_value = 1.0
+step = 0.1
+value = 0.8
+tick_count = 11
+ticks_on_borders = true
+
+[node name="MuteMusicCheckbox" type="CheckBox" parent="Settings_menu/Smenu/VBoxContainer" unique_id=749629878]
+layout_mode = 2
+text = "Mute music"
+
+[node name="SFXText" type="RichTextLabel" parent="Settings_menu/Smenu/VBoxContainer" unique_id=1066469637]
+layout_mode = 2
+text = "| SFX volume"
+fit_content = true
+
+[node name="SFXVolume" type="HSlider" parent="Settings_menu/Smenu/VBoxContainer" unique_id=1707404157]
+layout_mode = 2
+max_value = 1.0
+step = 0.1
+value = 0.7
+tick_count = 11
+ticks_on_borders = true
+
+[node name="MuteSFXCheckbox" type="CheckBox" parent="Settings_menu/Smenu/VBoxContainer" unique_id=1416416225]
+layout_mode = 2
+text = "Mute SFX"
+
+[node name="ResolutionText" type="RichTextLabel" parent="Settings_menu/Smenu/VBoxContainer" unique_id=1844409368]
+layout_mode = 2
+text = "| Video Settings:"
+fit_content = true
+
+[node name="FullscreenControl" type="CheckButton" parent="Settings_menu/Smenu/VBoxContainer" unique_id=1969319302]
+layout_mode = 2
+text = "Fullscreen"
+
+[node name="BackButton" type="Button" parent="Settings_menu" unique_id=434540447]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 21.0
+offset_top = 17.0
+offset_right = 99.0
+offset_bottom = 59.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 24
+text = "BACK"
+
 [connection signal="pressed" from="MainMenu/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="Settings_button" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="Settings_button" to="." method="_on_settings_button_pressed"]
+[connection signal="value_changed" from="Settings_menu/Smenu/VBoxContainer/MusicVolume" to="." method="_on_music_volume_value_changed"]
+[connection signal="toggled" from="Settings_menu/Smenu/VBoxContainer/MuteMusicCheckbox" to="." method="_on_mute_music_checkbox_toggled"]
+[connection signal="value_changed" from="Settings_menu/Smenu/VBoxContainer/SFXVolume" to="." method="_on_sfx_volume_value_changed"]
+[connection signal="toggled" from="Settings_menu/Smenu/VBoxContainer/MuteSFXCheckbox" to="." method="_on_mute_sfx_checkbox_toggled"]
+[connection signal="toggled" from="Settings_menu/Smenu/VBoxContainer/FullscreenControl" to="." method="_on_fullscreen_control_toggled"]
+[connection signal="pressed" from="Settings_menu/BackButton" to="." method="_on_back_button_pressed"]

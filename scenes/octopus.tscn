@@ -85,5 +85,5 @@ material = SubResource("StandardMaterial3D_24de5")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1024259226]
 libraries/ = SubResource("AnimationLibrary_fhwgg")
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=1946922062]
-bus = &"SFX Monster"
+[node name="SFX" type="AudioStreamPlayer3D" parent="." unique_id=1946922062]
+bus = &"SFX"

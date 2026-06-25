@@ -505,10 +505,11 @@ root_node = NodePath("../OmniLight3D")
 libraries/ = SubResource("AnimationLibrary_3fv0k")
 autoplay = &"blink"
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="VFX_FireComp" unique_id=581207254]
+[node name="TorchSFX" type="AudioStreamPlayer3D" parent="VFX_FireComp" unique_id=581207254]
 stream = ExtResource("14_6rdvi")
 unit_size = 2.0
 autoplay = true
+bus = &"SFX"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1516608864]
 

@@ -10,11 +10,11 @@ config_version=5
 
 [application]
 
-config/name="MARPHAN GameJam"
+config/name="WhirlSpeed"
 run/main_scene="uid://bo1if15fmshyn"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 run/max_fps=60
-config/icon="res://icon.svg"
+config/icon="uid://cufll31wk1edb"
 
 [autoload]
 
@@ -22,8 +22,10 @@ Main="*uid://81nmgo14aoka"
 
 [display]
 
+window/size/viewport_width=1280
+window/size/viewport_height=720
 window/stretch/mode="canvas_items"
-window/stretch/aspect="expand"
+window/stretch/aspect="keep_width"
 
 [global_group]
 

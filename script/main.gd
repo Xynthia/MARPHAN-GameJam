@@ -42,9 +42,23 @@ func start_game() -> void:
 	await get_tree().scene_changed
 	game.visible = true
 
-func go_to_main_menu()-> void:
+func go_to_Settings_menu() -> void:
+	ui.settings_menu.visible = true
+	
 	game.visible = false
+	ui.main_menu.visible = false
+	ui.settings_button.visible = false
+	ui.game_change.visible = false
+	ui.player_speed_bar.visible = false
+	ui.octopus_health_bar.visible = false
+	ui.ramming_label.visible = false
+
+func go_to_main_menu()-> void:
 	ui.main_menu.visible = true
+	ui.settings_button.visible = true
+	
+	game.visible = false
+	ui.settings_menu.visible = false
 	ui.game_change.visible = false
 	ui.player_speed_bar.visible = false
 	ui.octopus_health_bar.visible = false

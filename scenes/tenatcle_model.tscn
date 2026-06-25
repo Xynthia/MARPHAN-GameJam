@@ -1,5 +1,8 @@
-[gd_scene format=3 uid="uid://cgij23vbylaaa"]
+[gd_scene format=3 uid="uid://bv20s62y3hjmb"]
 
 [ext_resource type="PackedScene" uid="uid://bbufh6xxx7x22" path="res://assets/models/Tenatcle.fbx" id="1_535s1"]
 
 [node name="TenatcleModel" unique_id=161717197 instance=ExtResource("1_535s1")]
+
+[node name="SFX" type="AudioStreamPlayer3D" parent="." index="2" unique_id=1932769267]
+bus = &"SFX"
