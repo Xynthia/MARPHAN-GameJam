@@ -26,7 +26,6 @@ func _ready() -> void:
 	main_menu.visible = false
 	octopus_health_bar.max_value = Main.octopus.max_health
 	player_speed_bar.max_value = Main.wave_manager.waves[0].max_speed
-	Main.player.camera_3d.current = false
 	
 	if !Main.first_start:
 		Main.go_to_main_menu()

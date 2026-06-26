@@ -23,6 +23,16 @@ func set_speed(amount : float) -> void:
 	for wave in waves:
 		wave.speed = amount
 
+func change_all_to_wave() -> void:
+	for box in Main.boxes_manager.boxes:
+		view_wave(box.parent)
+		Main.boxes_manager.boxes.erase(box)
+		box.queue_free()
+	for rune in Main.rune_manager.runes:
+		view_wave(rune.parent)
+		Main.rune_manager.runes.erase(rune)
+		rune.queue_free()
+
 func spawn_wave(parent : PathFollow3D, distance : int) -> void:
 	var new_wave = WAVE.instantiate()
 	waves.append(new_wave)

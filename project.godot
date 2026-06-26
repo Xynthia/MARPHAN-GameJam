@@ -17,6 +17,10 @@ run/max_fps=60
 config/icon="uid://cufll31wk1edb"
 config/windows_native_icon="res://assets/logo/MARPHAN_WS_ico.ico"
 
+[audio]
+
+buses/default_bus_layout="uid://c5jugkyw3derg"
+
 [autoload]
 
 Main="*uid://81nmgo14aoka"

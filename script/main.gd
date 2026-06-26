@@ -13,6 +13,9 @@ var game : Game
 var in_game : bool = false
 var first_start : bool = false
 
+var tentacle_attack_timer : float = 0
+var tentacle_attack_time : float = randf_range(7.0, 10.0)
+
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -28,13 +31,20 @@ var ramming_speed : bool = false:
 
 func _process(delta: float) -> void:
 	if in_game:
-		if wave_manager && boxes_manager && boxes_manager.boxes.size() < boxes_manager.max_amount_boxes:
+		if wave_manager && boxes_manager && boxes_manager.boxes.size() < boxes_manager.max_amount_boxes and Main.octopus.global_position == Main.octopus.starting_pos:
 			Main.change_wave_for(Box)
-		if wave_manager && rune_manager && rune_manager.runes.size() < rune_manager.max_runes_amount:
+		if wave_manager && rune_manager && rune_manager.runes.size() < rune_manager.max_runes_amount and Main.octopus.global_position == Main.octopus.starting_pos:
 			Main.change_wave_for(Rune)
 		
-		if tentacle_manager && tentacle_manager.tentacles.size() < tentacle_manager.max_tentacles:
-			pass
+		if octopus.global_position != octopus.starting_pos:
+			wave_manager.change_all_to_wave()
+		else:
+			tentacle_attack_timer += delta
+		
+		if tentacle_manager && tentacle_manager.tentacles.size() < tentacle_manager.max_tentacles && tentacle_attack_timer >= tentacle_attack_time && octopus.global_position == octopus.starting_pos:
+			tentacle_manager.spawn_tentacle()
+			tentacle_attack_timer = 0
+			tentacle_attack_time = randf_range(7.0, 10.0)
 	if !in_game and Input.is_action_just_pressed("ramming"):
 		go_to_main_menu()
 
@@ -108,6 +118,4 @@ func change_wave_for(new_item ) -> void:
 				rune_manager.spawn_rune(random_follow_path)
 			Box:
 				boxes_manager.spawn_box(random_follow_path)
-			Tentacle:
-				tentacle_manager.spawn_tentacle(random_follow_path)
 	
