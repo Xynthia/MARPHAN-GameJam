@@ -15,11 +15,11 @@ func _ready() -> void:
 	Main.wave_manager = self
 	Main.in_game = true
 
-func change_speed(amount: int) -> void:
+func change_speed(amount: float) -> void:
 	for wave in waves:
 		wave.speed += amount
 
-func set_speed(amount : int) -> void:
+func set_speed(amount : float) -> void:
 	for wave in waves:
 		wave.speed = amount
 

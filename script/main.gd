@@ -19,7 +19,8 @@ func _ready() -> void:
 
 var ramming_speed : bool = false:
 	set(value):
-		if value == true:
+		ramming_speed = value
+		if ramming_speed == true:
 			octopus.move_to_middle()
 		elif ui:
 			ui.ramming_label.visible = false
@@ -31,13 +32,15 @@ func _process(delta: float) -> void:
 			Main.change_wave_for(Box)
 		if wave_manager && rune_manager && rune_manager.runes.size() < rune_manager.max_runes_amount:
 			Main.change_wave_for(Rune)
-		if wave_manager && tentacle_manager && tentacle_manager.tentacles.size() < tentacle_manager.max_tentacles:
-			Main.change_wave_for(Tentacle)
+		
+		if tentacle_manager && tentacle_manager.tentacles.size() < tentacle_manager.max_tentacles:
+			pass
 	if !in_game and Input.is_action_just_pressed("ramming"):
 		go_to_main_menu()
 
 func start_game() -> void:
 	get_tree().paused = false
+	
 	get_tree().change_scene_to_file("res://scenes/scene_manager.tscn")
 	await get_tree().scene_changed
 	game.visible = true
@@ -54,6 +57,8 @@ func go_to_Settings_menu() -> void:
 	ui.ramming_label.visible = false
 
 func go_to_main_menu()-> void:
+	get_tree().paused = true
+	
 	ui.main_menu.visible = true
 	ui.settings_button.visible = true
 	
@@ -63,6 +68,7 @@ func go_to_main_menu()-> void:
 	ui.player_speed_bar.visible = false
 	ui.octopus_health_bar.visible = false
 	ui.ramming_label.visible = false
+	
 
 func die() -> void:
 	get_tree().paused = true
@@ -82,10 +88,10 @@ func won() -> void:
 	ui.octopus_health_bar.visible = false
 	ui.ramming_label.visible = false
 
-func slow_down(amount : int) -> void:
+func slow_down(amount : float) -> void:
 	wave_manager.change_speed(amount)
 
-func speed_up(amount : int) -> void:
+func speed_up(amount : float) -> void:
 	wave_manager.change_speed(amount)
 
 func change_wave_for(new_item ) -> void:

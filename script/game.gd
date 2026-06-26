@@ -8,4 +8,4 @@ func _ready() -> void:
 
 func _on_passive_speed_increase_timeout() -> void:
 	var _rAmount : float = randf_range(0.01, 0.1)
-	Main.wave_manager.waves[0].speed += _rAmount
+	Main.speed_up(_rAmount)

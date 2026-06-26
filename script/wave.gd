@@ -14,13 +14,13 @@ var speed : float :
 		
 		if speed == 0:
 			Main.die()
-		if speed >= ramming_speed:
+		if Main.ramming_speed == false && speed >= ramming_speed:
 			Main.ramming_speed = true
-		else:
+		elif Main.ramming_speed == true && speed <= ramming_speed:
 			Main.ramming_speed = false
 		
 
-@onready var csg_box_3d: CSGBox3D = $CSGBox3D
+@onready var water_model: Node3D = $water_model
 
 var moving_below : bool = false :
 	set(value):
@@ -41,14 +41,14 @@ func idle(is_moving) -> void:
 	random_pos.z += randf_range(0, 1)
 
 	if !is_moving:
-		tween.tween_property(csg_box_3d, "global_position:y", 0, 1.5)
-		tween.tween_property(csg_box_3d, "global_rotation_degrees:x", random_pos.x, 2)
+		tween.tween_property(water_model, "global_position:y", 0, 1.5)
+		tween.tween_property(water_model, "global_rotation_degrees:x", random_pos.x, 2)
 		tween.tween_interval(0.1)
-		tween.tween_property(csg_box_3d, "global_rotation_degrees:x", -random_pos.x, 2)
+		tween.tween_property(water_model, "global_rotation_degrees:x", -random_pos.x, 2)
 		await tween.finished
 		idle(moving_below)
 	else:
-		tween.tween_property(csg_box_3d, "global_position:y", -8, 1)
+		tween.tween_property(water_model, "global_position:y", -8, 1)
 
 func _on_body_entered(body: Node3D) -> void:
 	if body.is_in_group("Player"):

@@ -3,14 +3,14 @@
 [ext_resource type="Script" uid="uid://dew7fpakb3456" path="res://script/player.gd" id="1_3vyb7"]
 [ext_resource type="AudioStream" uid="uid://cytlfqh5hedtr" path="res://assets/audio/Torch_fire.ogg" id="2_g2els"]
 [ext_resource type="PackedScene" uid="uid://dpi37txa43siq" path="res://scenes/viking_ship.tscn" id="2_qhqgy"]
+[ext_resource type="AudioStream" uid="uid://dvpv3rqk66jw3" path="res://assets/audio/BoatRam_Hit.ogg" id="2_y4r1p"]
+[ext_resource type="AudioStream" uid="uid://cyu4ae57i0t7x" path="res://assets/audio/BoatRam_Aftermath.ogg" id="3_d2wvv"]
 [ext_resource type="Texture2D" uid="uid://rxd4g2s7ctk0" path="res://assets/images/Circle.png" id="3_smehm"]
+[ext_resource type="AudioStream" uid="uid://hltsntomnxd5" path="res://assets/audio/Rune_Pickup.ogg" id="4_d2wvv"]
 [ext_resource type="Material" uid="uid://mbeanljs7j8i" path="res://materials/rain_drop.material" id="4_ur7pv"]
 [ext_resource type="Material" uid="uid://cmswens1io2l6" path="res://materials/rain_drop_billboard.material" id="5_y4r1p"]
 [ext_resource type="Texture2D" uid="uid://c3j8qdw6uh4x7" path="res://assets/images/T_fire01.png" id="6_d2wvv"]
 [ext_resource type="Texture2D" uid="uid://iomq5as5lapg" path="res://assets/images/T_VFX_Glow_1.PNG" id="7_3v2ag"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_swqr5"]
-size = Vector3(1, 1.4667358, 2.7856445)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_24de5"]
 size = Vector3(1, 1.4744873, 2.7855835)
@@ -335,17 +335,31 @@ size = Vector3(0.01953125, 0.7504883, 0.076171875)
 collision_layer = 32768
 script = ExtResource("1_3vyb7")
 
+[node name="AudioListener3D" type="AudioListener3D" parent="." unique_id=452730888]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.30361557, 1.0808594)
+
 [node name="SFX" type="AudioStreamPlayer3D" parent="." unique_id=1085038129]
+stream = ExtResource("2_y4r1p")
+volume_db = -6.0
 bus = &"SFX"
+
+[node name="SFX2" type="AudioStreamPlayer3D" parent="." unique_id=1227954559]
+stream = ExtResource("3_d2wvv")
+volume_db = -6.0
+bus = &"SFX"
+
+[node name="SFX Rune" type="AudioStreamPlayer3D" parent="." unique_id=1623405961]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.1881101)
+stream = ExtResource("4_d2wvv")
+bus = &"Rune"
+
+[node name="SFX Box" type="AudioStreamPlayer3D" parent="." unique_id=389986367]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.1881101)
+stream = ExtResource("4_d2wvv")
+bus = &"Box"
 
 [node name="vikingShip" parent="." unique_id=1916623914 instance=ExtResource("2_qhqgy")]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
-
-[node name="Area3D" type="Area3D" parent="." unique_id=236616115]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1957156496]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.23428345, -0.080566406)
-shape = SubResource("BoxShape3D_swqr5")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2146015858]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.23724365, -0.08041382)
@@ -357,6 +371,7 @@ spring_length = 3.0
 
 [node name="Camera3D" type="Camera3D" parent="SpringArm3D" unique_id=329148807]
 transform = Transform3D(1, 0, 0, 0, 1.0000001, 2.9802322e-08, 0, -2.9802322e-08, 1.0000001, 0, 8.940697e-08, -2.2351742e-07)
+current = true
 
 [node name="wind" type="GPUParticles3D" parent="." unique_id=843538465]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0031108856, 0.76994514, -2.5953112)
@@ -426,5 +441,3 @@ bus = &"SFX"
 transform = Transform3D(1, 0, -1.7484555e-07, 0, 1, 0, 1.7484555e-07, 0, 1, -0.0015010834, -0.58551353, 0.002661705)
 material_override = SubResource("StandardMaterial3D_cs1tg")
 mesh = SubResource("BoxMesh_2dvfe")
-
-[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

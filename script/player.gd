@@ -1,13 +1,26 @@
 class_name Player
 extends CharacterBody3D
 
+const BOAT_RAM_START = preload("uid://b3f5w5lclinej")
 const BOAT_RAM_AFTERMATH = preload("uid://cyu4ae57i0t7x")
 const BOAT_RAM_HIT = preload("uid://dvpv3rqk66jw3")
 
+const RUNE_BUFFACTIVE = preload("uid://dyb3iep4i8rty")
+const RUNE_PICKUP = preload("uid://hltsntomnxd5")
+
+const OBSTACLE_HIT_1 = preload("uid://cvns7k2aebfas")
+const OBSTACLE_HIT_2 = preload("uid://cr2lrma1iqtyh")
+var hit_audio : Array[AudioStream] = [OBSTACLE_HIT_1, OBSTACLE_HIT_2]
 
 @onready var viking_ship: Node3D = $vikingShip
 @onready var collision_shape_3d: CollisionShape3D = $CollisionShape3D
 @onready var sfx: AudioStreamPlayer3D = $SFX
+@onready var sfx_2: AudioStreamPlayer3D = $SFX2
+@onready var sfx_rune: AudioStreamPlayer3D = $"SFX Rune"
+@onready var sfx_box: AudioStreamPlayer3D = $"SFX Box"
+
+@onready var camera_3d: Camera3D = $SpringArm3D/Camera3D
+
 
 enum lanes {LEFT, MIDDLE, RIGHT}
 var current_lane : lanes = lanes.RIGHT
@@ -45,19 +58,33 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ramming") && Main.octopus.is_in_middle_pos && !attacking:
 		attack_octupus()
 	
-	if event.is_action_pressed("move left") && !moving:
+	if event.is_action_pressed("move left"):
 		move_lane(Vector3.MODEL_LEFT)
-	if event.is_action_pressed("move right") && !moving:
+	if event.is_action_pressed("move right"):
 		move_lane(Vector3.MODEL_RIGHT)
+
+func play_start_ram() ->  void:
+	sfx.stream = BOAT_RAM_START
+	sfx.play()
+	await sfx.finished
 
 func play_audio_hit() -> void:
 	sfx.stream = BOAT_RAM_HIT
 	sfx.play()
+	sfx_2.play()
 	await sfx.finished
-	get_tree().create_timer(0.3)
-	sfx.stream = BOAT_RAM_AFTERMATH
-	sfx.play()
-	await sfx.finished
+	await sfx_2.finished
+
+func play_pickup() -> void:
+	sfx_rune.stream = RUNE_PICKUP
+	sfx_rune.play()
+	await sfx_rune.finished
+
+func play_pickup_audio() -> void:
+	var rand_id = randi_range(0, hit_audio.size() -1)
+	sfx_box.stream = hit_audio[rand_id]
+	sfx_box.play()
+	await sfx_box.finished
 
 func animation_idle() -> void:
 	var tween_idle_bank : Tween = create_tween()
@@ -83,6 +110,7 @@ func animation_idle() -> void:
 
 func attack_octupus() -> void:
 	attacking = true
+	play_start_ram()
 	Main.wave_manager.set_speed(Main.wave_manager.waves[0].max_speed)
 	await move_into_octopus()
 	play_audio_hit()
@@ -108,8 +136,6 @@ func move_back_to_start_pos() -> void:
 	await tween.finished
 
 func move_lane(dir : Vector3) -> void:
-	moving = true
-	
 	var tween_move : Tween = create_tween()
 	var tween_bank : Tween = create_tween()
 	var tween_turn : Tween = create_tween()
@@ -122,37 +148,59 @@ func move_lane(dir : Vector3) -> void:
 	var bank_dir : float = self.rotation_degrees.z
 	var pitch_amount = randi_range(min_pitch_amount, max_pitch_amount)
 	
-	match current_lane:
-		lanes.LEFT:
-			match dir:
-				Vector3.MODEL_RIGHT:
-					next_lane = lanes.MIDDLE
-					move_dir = 15
-					move_foward_dir = 10
-					turn_dir -= randi_range(min_turn_amount ,max_turn_amount)
-					bank_dir -= randi_range(min_bank_amount ,max_bank_amount)
-		lanes.MIDDLE:
-			match dir:
-				Vector3.MODEL_LEFT:
-					next_lane = lanes.LEFT
-					move_dir = 10
-					move_foward_dir = 5
-					turn_dir += randi_range(min_turn_amount ,max_turn_amount)
-					bank_dir += randi_range(min_bank_amount ,max_bank_amount)
-				Vector3.MODEL_RIGHT:
-					next_lane = lanes.RIGHT
-					move_dir = 20
-					move_foward_dir = 15
-					turn_dir -= randi_range(min_turn_amount ,max_turn_amount)
-					bank_dir -= randi_range(min_bank_amount ,max_bank_amount)
-		lanes.RIGHT:
-			match dir:
-				Vector3.MODEL_LEFT:
-					next_lane = lanes.MIDDLE
-					move_dir = 15
-					move_foward_dir = 10
-					turn_dir += randi_range(min_turn_amount ,max_turn_amount)
-					bank_dir += randi_range(min_bank_amount ,max_bank_amount)
+	if !moving:
+		moving = true
+		match current_lane:
+			lanes.LEFT:
+				match dir:
+					Vector3.MODEL_RIGHT:
+						next_lane = lanes.MIDDLE
+						move_dir = 15
+						move_foward_dir = 10
+						turn_dir -= randi_range(min_turn_amount ,max_turn_amount)
+						bank_dir -= randi_range(min_bank_amount ,max_bank_amount)
+			lanes.MIDDLE:
+				match dir:
+					Vector3.MODEL_LEFT:
+						next_lane = lanes.LEFT
+						move_dir = 10
+						move_foward_dir = 5
+						turn_dir += randi_range(min_turn_amount ,max_turn_amount)
+						bank_dir += randi_range(min_bank_amount ,max_bank_amount)
+					Vector3.MODEL_RIGHT:
+						next_lane = lanes.RIGHT
+						move_dir = 20
+						move_foward_dir = 15
+						turn_dir -= randi_range(min_turn_amount ,max_turn_amount)
+						bank_dir -= randi_range(min_bank_amount ,max_bank_amount)
+			lanes.RIGHT:
+				match dir:
+					Vector3.MODEL_LEFT:
+						next_lane = lanes.MIDDLE
+						move_dir = 15
+						move_foward_dir = 10
+						turn_dir += randi_range(min_turn_amount ,max_turn_amount)
+						bank_dir += randi_range(min_bank_amount ,max_bank_amount)
+	else:
+		match current_lane:
+			lanes.LEFT:
+				next_lane = lanes.LEFT
+				move_dir = 10
+				move_foward_dir = 5
+				turn_dir += randi_range(min_turn_amount ,max_turn_amount)
+				bank_dir += randi_range(min_bank_amount ,max_bank_amount)
+			lanes.MIDDLE:
+				next_lane = lanes.MIDDLE
+				move_dir = 15
+				move_foward_dir = 10
+				turn_dir -= randi_range(min_turn_amount ,max_turn_amount)
+				bank_dir -= randi_range(min_bank_amount ,max_bank_amount)
+			lanes.RIGHT:
+				next_lane = lanes.RIGHT
+				move_dir = 20
+				move_foward_dir = 15
+				turn_dir -= randi_range(min_turn_amount ,max_turn_amount)
+				bank_dir -= randi_range(min_bank_amount ,max_bank_amount)
 	
 	if next_lane != null:
 		var new_move = Vector3(move_dir, 0, move_foward_dir)

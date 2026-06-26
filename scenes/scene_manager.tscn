@@ -3,7 +3,10 @@
 [ext_resource type="PackedScene" uid="uid://yrwevoqm0s0r" path="res://scenes/game.tscn" id="1_65mdo"]
 [ext_resource type="PackedScene" uid="uid://jtuhyn3sh7m7" path="res://scenes/ui.tscn" id="2_b81s6"]
 
+[sub_resource type="GDScript" id="GDScript_65mdo"]
+
 [node name="SceneManager" type="Node3D" unique_id=1922280718]
+script = SubResource("GDScript_65mdo")
 
 [node name="Game" parent="." unique_id=1114938022 instance=ExtResource("1_65mdo")]
 
