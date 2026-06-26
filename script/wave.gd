@@ -6,11 +6,14 @@ var parent : PathFollow3D
 var start_speed : float = 15
 var max_speed: float = 50
 var ramming_speed : float = (max_speed/ 100) * 75
+
+var ui_tween: Tween
+
 var speed : float :
 	set(value):
 		speed = clamp(value, 0, max_speed)
 		if Main.ui:
-			Main.ui.player_speed_bar.value = speed
+			animate_ui_smoothly(value)
 		
 		if speed == 0:
 			Main.die()
@@ -25,6 +28,23 @@ var speed : float :
 var moving_below : bool = false :
 	set(value):
 		idle(value)
+
+func animate_ui_smoothly(target_value: float):
+	if ui_tween:
+		ui_tween.kill()
+	
+	ui_tween = create_tween().set_parallel(true)
+	
+	ui_tween.tween_property(Main.ui.player_speed_bar_tex, "value", target_value, 0.3).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	
+	var target_progress = target_value / max_speed
+	ui_tween.tween_method(
+		func(val): Main.ui.player_speed_bar.material.set_shader_parameter("progress", val),
+		Main.ui.player_speed_bar.material.get_shader_parameter("progress"),
+		target_progress,
+		0.45
+	).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+
 
 func _ready() -> void:
 	moving_below = false

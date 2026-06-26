@@ -20,12 +20,14 @@ const BOAT_RAM_MONSTER_REACTION = preload("uid://dbpyuqi6256cl")
 
 const MONSTER_DEATH = preload("uid://dhd0jrfp7xaa7")
 
+var ui_tween: Tween
+
 var max_health : float = 100
 var health : float :
 	set(value):
 		health = clampf(value, 0, max_health)
 		if Main.ui:
-			Main.ui.octopus_health_bar.value = health
+			animate_ui_smoothly(health)
 		if health == 0:
 			play_audio_dead()
 			Main.won()
@@ -76,6 +78,22 @@ func _process(delta: float) -> void:
 			#timer_attack = 0
 			#random_time_between_attacks = randf_range(5.0, 10.0)
 			#attack()
+
+
+func animate_ui_smoothly(target_value: float):
+	if ui_tween:
+		ui_tween.kill()
+	
+	ui_tween = create_tween().set_parallel(true)
+	
+	var target_progress = target_value / max_health
+	ui_tween.tween_method(
+		func(val): Main.ui.octopus_health_bar.material.set_shader_parameter("progress", val),
+		Main.ui.octopus_health_bar.material.get_shader_parameter("progress"),
+		target_progress,
+		2
+	).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+
 
 func play_audio_hit() -> void:
 	sfx.stream = BOAT_RAM_MONSTER_HIT

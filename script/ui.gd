@@ -6,27 +6,32 @@ extends Control
 @onready var octopus_health_bar: ProgressBar = $OctopusHealthBar/OctopusHealthBar
 
 @onready var player_speed_bar: ProgressBar = $PlayerSpeedBar/PlayerSpeedBar
+@onready var player_speed_bar_tex: TextureProgressBar = $PlayerSpeedBar/PlayerSpeedBar_tex
 
 @onready var game_change: Panel = $GameChange
 @onready var game_change_label: Label = $GameChange/GameChangeLabel
 
 @onready var main_menu: Control = $MainMenu
-@onready var main_menu_label: Label = $MainMenu/MainMenuLabel
+@onready var main_menu_label: Label = $MainMenu/VBoxContainer/MainMenuLabel
 
 @onready var settings_menu: Control = $Settings_menu
-@onready var settings_button: Button = $Settings_button
+@onready var settings_button: Button = $MainMenu/VBoxContainer/SettingsButton
+@onready var start_button: Button = $MainMenu/VBoxContainer/StartButton
+@onready var v_box_container: VBoxContainer = $MainMenu/VBoxContainer
 
+@onready var glass_rain_layer: CanvasLayer = $GlassRain_Layer
 
 func _ready() -> void:
 	Main.ui = self
 	ramming_label.visible = false
+	glass_rain_layer.visible = false
 	game_change.visible = false
 	settings_menu.visible = false
 	settings_button.visible = false
 	main_menu.visible = false
 	octopus_health_bar.max_value = Main.octopus.max_health
 	player_speed_bar.max_value = Main.wave_manager.waves[0].max_speed
-	Main.player.camera_3d.current = false
+	player_speed_bar_tex.max_value = Main.wave_manager.waves[0].max_speed
 	
 	if !Main.first_start:
 		Main.go_to_main_menu()
@@ -69,3 +74,29 @@ func _on_fullscreen_control_toggled(toggled_on: bool) -> void:
 func _on_back_button_pressed() -> void:
 	Main.go_to_main_menu()
 	$SfxReturn.play()
+
+##hovers
+#func UI_ScaleUpTween(body: VBoxContainer, factor: float = 1.05, time: float = 0.1):
+	#var tween = get_tree().create_tween()
+	#tween.set_ease(Tween.EASE_OUT)
+	#var base_scale : Vector2 = body.scale
+	#var new_scale : Vector2 = base_scale * factor
+#
+	#tween.tween_property(body, "scale", new_scale, time)
+	#await tween.finished
+#
+#func UI_ScaleDownTween(body: VBoxContainer, factor: float = 1.05, time: float = 0.1):
+	#var tween = get_tree().create_tween()
+	#tween.set_ease(Tween.EASE_IN)
+	#var base_scale : Vector2 = body.scale
+	#var new_scale : Vector2 = base_scale / factor
+#
+	#tween.tween_property(body, "scale", new_scale, time)
+	#await tween.finished
+#
+#func _on_v_box_container_mouse_entered() -> void:
+	#UI_ScaleUpTween(v_box_container)
+#
+#
+#func _on_v_box_container_mouse_exited() -> void:
+	#UI_ScaleDownTween(v_box_container)

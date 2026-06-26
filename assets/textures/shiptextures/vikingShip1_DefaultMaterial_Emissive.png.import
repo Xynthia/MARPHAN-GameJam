@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ch1eb1v8e4utn"
-path.s3tc="res://.godot/imported/uv_example.png-58d9ad0325b30694eae3fd189814a730.s3tc.ctex"
+uid="uid://mnkmtmgxoy1d"
+path.s3tc="res://.godot/imported/vikingShip1_DefaultMaterial_Emissive.png-90cc11d909ec983ee1ee73521c702ee2.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/textures/waves/uv_example.png"
-dest_files=["res://.godot/imported/uv_example.png-58d9ad0325b30694eae3fd189814a730.s3tc.ctex"]
+source_file="res://assets/textures/shiptextures/vikingShip1_DefaultMaterial_Emissive.png"
+dest_files=["res://.godot/imported/vikingShip1_DefaultMaterial_Emissive.png-90cc11d909ec983ee1ee73521c702ee2.s3tc.ctex"]
 
 [params]
 

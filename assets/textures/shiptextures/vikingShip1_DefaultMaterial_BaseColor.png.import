@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://wgdkhdd2b6mf"
-path.s3tc="res://.godot/imported/vikingShip1_DefaultMaterial_OcclusionRoughnessMetallic.png-294f138190d6adb224de9a37584ad344.s3tc.ctex"
+uid="uid://d3elly04ug8m7"
+path.s3tc="res://.godot/imported/vikingShip1_DefaultMaterial_BaseColor.png-f39089b318022419a9611747c1b25d1b.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/models/shiptextures/vikingShip1_DefaultMaterial_OcclusionRoughnessMetallic.png"
-dest_files=["res://.godot/imported/vikingShip1_DefaultMaterial_OcclusionRoughnessMetallic.png-294f138190d6adb224de9a37584ad344.s3tc.ctex"]
+source_file="res://assets/textures/shiptextures/vikingShip1_DefaultMaterial_BaseColor.png"
+dest_files=["res://.godot/imported/vikingShip1_DefaultMaterial_BaseColor.png-f39089b318022419a9611747c1b25d1b.s3tc.ctex"]
 
 [params]
 

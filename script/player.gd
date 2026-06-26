@@ -16,8 +16,10 @@ var hit_audio : Array[AudioStream] = [OBSTACLE_HIT_1, OBSTACLE_HIT_2]
 @onready var collision_shape_3d: CollisionShape3D = $CollisionShape3D
 @onready var sfx: AudioStreamPlayer3D = $SFX
 @onready var sfx_2: AudioStreamPlayer3D = $SFX2
+@onready var sfx_3: AudioStreamPlayer3D = $SFX3
 @onready var sfx_rune: AudioStreamPlayer3D = $"SFX Rune"
 @onready var sfx_box: AudioStreamPlayer3D = $"SFX Box"
+@onready var cam_shake: ColorRect = $CamShake/ColorRect
 
 @onready var camera_3d: Camera3D = $SpringArm3D/Camera3D
 
@@ -63,28 +65,52 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("move right"):
 		move_lane(Vector3.MODEL_RIGHT)
 
+var camShake_Tween : Tween
+func set_camShakesmoothly(target_value: float):
+	if camShake_Tween:
+		camShake_Tween.kill()
+	
+	camShake_Tween = create_tween().set_parallel(true)
+	
+	camShake_Tween.tween_method(
+		func(val): cam_shake.material.set_shader_parameter("ShakeStrength", val),
+		cam_shake.material.get_shader_parameter("ShakeStrength"),
+		target_value,
+		1
+	).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+
 func play_start_ram() ->  void:
-	sfx.stream = BOAT_RAM_START
-	sfx.play()
-	await sfx.finished
+	sfx_3.pitch_scale = randf_range(0.9, 1.1)
+	sfx_3.play()
+	set_camShakesmoothly(1.5) #speed up
+	await sfx_3.finished
 
 func play_audio_hit() -> void:
-	sfx.stream = BOAT_RAM_HIT
+	#sfx.stream = BOAT_RAM_HIT
+	sfx.pitch_scale = randf_range(0.9, 1.1)
 	sfx.play()
-	sfx_2.play()
+	set_camShakesmoothly(4.0) # heavy
 	await sfx.finished
+	set_camShakesmoothly(0.35) # normal
+	sfx_2.pitch_scale = randf_range(0.9, 1.1)
+	sfx_2.play()
 	await sfx_2.finished
 
 func play_pickup() -> void:
-	sfx_rune.stream = RUNE_PICKUP
+	#sfx_rune.stream = RUNE_PICKUP
+	sfx_rune.pitch_scale = randf_range(0.9, 1.1)
 	sfx_rune.play()
+	set_camShakesmoothly(0.65) # slightly faster
 	await sfx_rune.finished
 
 func play_pickup_audio() -> void:
 	var rand_id = randi_range(0, hit_audio.size() -1)
 	sfx_box.stream = hit_audio[rand_id]
+	sfx_box.pitch_scale = randf_range(0.9, 1.1)
 	sfx_box.play()
+	set_camShakesmoothly(1.5) # heavy
 	await sfx_box.finished
+	set_camShakesmoothly(0.35) # normal
 
 func animation_idle() -> void:
 	var tween_idle_bank : Tween = create_tween()

@@ -2,11 +2,22 @@
 
 [ext_resource type="PackedScene" uid="uid://ckf1t3ikwjjf7" path="res://assets/models/monstie_combo_wanims.fbx" id="1_v6hu4"]
 [ext_resource type="Script" uid="uid://bdqfit6kai22m" path="res://script/monstie_combo_wanims.gd" id="2_sfd40"]
+[ext_resource type="Texture2D" uid="uid://bevss4vc8uk21" path="res://assets/textures/monstiemats/monstie_monstiemats_BaseColor.png" id="3_e2w2t"]
+[ext_resource type="Texture2D" uid="uid://bmi1d3onfiirl" path="res://assets/textures/monstiemats/monstie_monstiemats_OcclusionRoughnessMetallic.png" id="4_46bpn"]
+[ext_resource type="Texture2D" uid="uid://e2louc6empi5" path="res://assets/textures/monstiemats/monstie_monstiemats_Normal.png" id="5_02xy4"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cg4qv"]
+albedo_texture = ExtResource("3_e2w2t")
+metallic = 1.0
+metallic_texture = ExtResource("4_46bpn")
+roughness_texture = ExtResource("4_46bpn")
+normal_enabled = true
+normal_texture = ExtResource("5_02xy4")
 
 [node name="monstie_combo_wanims" unique_id=538648148 instance=ExtResource("1_v6hu4")]
 script = ExtResource("2_sfd40")
 
-[node name="Skeleton3D" parent="monstiebones" parent_id_path=PackedInt32Array(1403634190) index="0" unique_id=1276542893]
+[node name="Skeleton3D" parent="monstiebones" parent_id_path=PackedInt32Array(521102850) index="0" unique_id=1127250742]
 bones/1/rotation = Quaternion(0.683559, 0.014525575, -0.549084, -0.4806693)
 bones/2/rotation = Quaternion(-0.2954232, 0.009503755, 0.04192752, 0.95439875)
 bones/3/rotation = Quaternion(-0.22192109, 0.01584177, -0.04900055, 0.97370386)
@@ -66,3 +77,6 @@ bones/71/rotation = Quaternion(0.92887914, 0.08856757, -0.039835256, 0.3574248)
 bones/72/rotation = Quaternion(-0.24311875, 8.61958e-08, -0.12570529, 0.9618168)
 bones/74/rotation = Quaternion(0.8399431, 0.07081346, 0.07243776, 0.5331359)
 bones/75/rotation = Quaternion(-0.11253057, 1.7632736e-07, -0.024253113, 0.99335223)
+
+[node name="monstiecombined" parent="monstiebones/Skeleton3D" index="0" unique_id=1854401716]
+surface_material_override/0 = SubResource("StandardMaterial3D_cg4qv")

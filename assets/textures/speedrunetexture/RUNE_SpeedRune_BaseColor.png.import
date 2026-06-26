@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bt2n5jcmwee2a"
-path.s3tc="res://.godot/imported/83963.jpg-771e872b8bae43bab3cda75aebde96fa.s3tc.ctex"
+uid="uid://bae2w8qq6pd5f"
+path.s3tc="res://.godot/imported/RUNE_SpeedRune_BaseColor.png-51e8f2127cbb5e8cd36ca2551d8b59a6.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/images/83963.jpg"
-dest_files=["res://.godot/imported/83963.jpg-771e872b8bae43bab3cda75aebde96fa.s3tc.ctex"]
+source_file="res://assets/textures/speedrunetexture/RUNE_SpeedRune_BaseColor.png"
+dest_files=["res://.godot/imported/RUNE_SpeedRune_BaseColor.png-51e8f2127cbb5e8cd36ca2551d8b59a6.s3tc.ctex"]
 
 [params]
 

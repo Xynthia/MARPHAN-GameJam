@@ -1,69 +1,75 @@
 [gd_scene format=3 uid="uid://jtuhyn3sh7m7"]
 
 [ext_resource type="Script" uid="uid://3kowtepeef6s" path="res://script/ui.gd" id="1_x4jx1"]
-[ext_resource type="Texture2D" uid="uid://d0o04ajqrp0d0" path="res://icon.svg" id="2_yev5y"]
+[ext_resource type="FontFile" uid="uid://1dueejh5mf7c" path="res://assets/Fonts/First Legion.ttf" id="2_7dvkv"]
+[ext_resource type="Texture2D" uid="uid://cc44gp6hmqfk6" path="res://assets/images/keyboard_space_icon.png" id="3_7dvkv"]
 [ext_resource type="AudioStream" uid="uid://ciqxayb341ie2" path="res://assets/audio/SFX_Pickup.wav" id="3_gdt2y"]
-[ext_resource type="Texture2D" uid="uid://dklpbuk4g56t" path="res://assets/images/SettingsIcon.svg" id="3_wm3ai"]
+[ext_resource type="Shader" uid="uid://yklli6j6205s" path="res://materials/shaders/SpeedBar.gdshader" id="3_p7vwb"]
+[ext_resource type="Texture2D" uid="uid://bloeujafwsgmb" path="res://assets/images/UI_boat.png" id="4_ktti3"]
+[ext_resource type="Shader" uid="uid://ctkdc3whu0s6f" path="res://scenes/BossHP.gdshader" id="4_vdcm2"]
 [ext_resource type="AudioStream" uid="uid://cceoagcy87uu1" path="res://assets/audio/SFX_Return_False.wav" id="4_wm3ai"]
+[ext_resource type="Script" uid="uid://cogdvrn3g1uak" path="res://scenes/player_speed_bar_tex.gd" id="5_cgfq5"]
+[ext_resource type="Shader" uid="uid://bk2tw5fyhtui8" path="res://materials/shaders/glassRain_Canvas.gdshader" id="6_8dubc"]
+[ext_resource type="Texture2D" uid="uid://cufll31wk1edb" path="res://MARPHAN_WS_icon.svg" id="8_6rmj2"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tipki"]
-content_margin_left = 2.0
-content_margin_top = 2.0
-content_margin_right = 2.0
-content_margin_bottom = 2.0
-bg_color = Color(0.1, 0.1, 0.1, 0.3)
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
-corner_detail = 6
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7dvkv"]
+shader = ExtResource("4_vdcm2")
+shader_parameter/progress = 1.0
+shader_parameter/background_color = Color(0.1, 0.1, 0.1, 0.6)
+shader_parameter/progress_color = Color(0.82, 0.14760001, 0.14760001, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_85g3d"]
-content_margin_left = 2.0
-content_margin_top = 2.0
-content_margin_right = 2.0
-content_margin_bottom = 2.0
-bg_color = Color(0.94509804, 0, 0.08627451, 0.5411765)
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
-corner_detail = 6
+[sub_resource type="Gradient" id="Gradient_p7vwb"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0.1, 0.3, 0.7, 0.9, 1)
+colors = PackedColorArray(0.79, 0.18565002, 0.07900002, 1, 0, 0.9666667, 1, 1, 0, 0.9666667, 1, 1, 0, 0.9647059, 1, 1, 0, 1, 0.5999999, 1)
+metadata/_snap_enabled = true
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_choun"]
-content_margin_left = 2.0
-content_margin_top = 2.0
-content_margin_right = 2.0
-content_margin_bottom = 2.0
-bg_color = Color(0.1, 0.1, 0.1, 0.3)
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
-corner_detail = 6
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ktti3"]
+gradient = SubResource("Gradient_p7vwb")
+width = 300
+height = 35
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ya4ey"]
-content_margin_left = 2.0
-content_margin_top = 2.0
-content_margin_right = 2.0
-content_margin_bottom = 2.0
-bg_color = Color(0, 0.5314506, 0.82502365, 0.5411765)
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
-corner_detail = 6
+[sub_resource type="Gradient" id="Gradient_ktti3"]
+offsets = PackedFloat32Array(0, 0.2, 0.8, 1)
+colors = PackedColorArray(0.8, 0.8, 0.8, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.8, 0.8, 0.8, 1)
+metadata/_snap_enabled = true
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x4jx1"]
-bg_color = Color(0.262932, 0.262932, 0.262932, 1)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_p7vwb"]
+gradient = SubResource("Gradient_ktti3")
+
+[sub_resource type="Gradient" id="Gradient_cgfq5"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_cgfq5"]
+gradient = SubResource("Gradient_cgfq5")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rlppe"]
+shader = ExtResource("3_p7vwb")
+shader_parameter/progress = 1.0
+shader_parameter/background_color = Color(0.5, 0.5, 0.5, 1)
+shader_parameter/color_gradient = SubResource("GradientTexture2D_ktti3")
+shader_parameter/mask_texture = SubResource("GradientTexture1D_p7vwb")
+shader_parameter/image_dimension = Vector2(300, 35)
+shader_parameter/wave_amplitude = 0.02
+shader_parameter/wave_frequency = 3.0
+shader_parameter/wave_speed = 1.0000000475
+shader_parameter/particle_speed = 0.05
+shader_parameter/particle_lifetime = 3.0
+shader_parameter/particle_softness = 0.01
+shader_parameter/particle_spacing = 0.1
+shader_parameter/particle_offset = Vector2(0, 0)
+shader_parameter/particle_start_scale = Vector2(0.01, 0.01)
+shader_parameter/particle_end_scale = Vector2(0.015, 0.015)
+shader_parameter/particle_scale_randomness = 1.0
+shader_parameter/particle_alpha_gradient = SubResource("GradientTexture1D_cgfq5")
+shader_parameter/particle_amount = 20
+
+[sub_resource type="LabelSettings" id="LabelSettings_p2yx8"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p7vwb"]
+shader = ExtResource("6_8dubc")
+shader_parameter/frequency = 0.10000015050212065
+shader_parameter/size = 0.0370000017575
 
 [node name="UI" type="Control" unique_id=990566653]
 process_mode = 3
@@ -76,39 +82,43 @@ grow_vertical = 2
 script = ExtResource("1_x4jx1")
 
 [node name="RammingLabel" type="Control" parent="." unique_id=810525279]
-custom_minimum_size = Vector2(220, 65)
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -110.0
-offset_top = -78.0
-offset_right = 110.0
-offset_bottom = -13.0
+offset_left = -165.0
+offset_top = -85.0
+offset_right = 165.41504
+offset_bottom = -20.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="Label" type="Label" parent="RammingLabel" unique_id=914194059]
+[node name="Label" type="RichTextLabel" parent="RammingLabel" unique_id=1700472608]
 layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -40.0
-offset_top = -11.5
-offset_bottom = 11.5
-grow_horizontal = 0
-grow_vertical = 2
-text = "to ram octopus"
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -110.20752
+offset_top = -45.999985
+offset_right = 193.79248
+offset_bottom = -5.9999847
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/normal_font = ExtResource("2_7dvkv")
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "[color=yellow]Ram[/color] the Monster"
+autowrap_mode = 0
+horizontal_alignment = 1
 vertical_alignment = 1
-uppercase = true
 
 [node name="Sprite2D" type="Sprite2D" parent="RammingLabel" unique_id=849526810]
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_yev5y")
+texture = ExtResource("3_7dvkv")
 centered = false
 
 [node name="OctopusHealthBar" type="Control" parent="." unique_id=2115411625]
@@ -123,14 +133,16 @@ offset_bottom = 40.0
 grow_horizontal = 2
 
 [node name="OctopusHealthBar" type="ProgressBar" parent="OctopusHealthBar" unique_id=175425547]
-custom_minimum_size = Vector2(300, 0)
-layout_mode = 0
-offset_right = 300.0
-offset_bottom = 27.0
-theme_override_styles/background = SubResource("StyleBoxFlat_tipki")
-theme_override_styles/fill = SubResource("StyleBoxFlat_85g3d")
-value = 100.0
-rounded = true
+material = SubResource("ShaderMaterial_7dvkv")
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -250.0
+offset_top = 15.0
+offset_right = 250.0
+offset_bottom = 32.000004
+grow_horizontal = 2
 show_percentage = false
 
 [node name="PlayerSpeedBar" type="Control" parent="." unique_id=203652237]
@@ -144,20 +156,33 @@ offset_right = 315.0
 offset_bottom = -15.0
 grow_vertical = 0
 
-[node name="PlayerSpeedBar" type="ProgressBar" parent="PlayerSpeedBar" unique_id=1170778149]
-custom_minimum_size = Vector2(300, 0)
+[node name="PlayerSpeedBar" type="ProgressBar" parent="PlayerSpeedBar" unique_id=666126843]
+material = SubResource("ShaderMaterial_rlppe")
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -27.0
+offset_top = -42.0
 offset_right = 300.0
+offset_bottom = -7.0
 grow_vertical = 0
-theme_override_styles/background = SubResource("StyleBoxFlat_choun")
-theme_override_styles/fill = SubResource("StyleBoxFlat_ya4ey")
 max_value = 50.0
-value = 15.0
 show_percentage = false
+
+[node name="PlayerSpeedBar_tex" type="TextureProgressBar" parent="PlayerSpeedBar" unique_id=1527594743]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -42.0
+offset_right = 300.0
+offset_bottom = -7.0
+grow_vertical = 0
+max_value = 50.0
+value = 50.0
+texture_progress = ExtResource("4_ktti3")
+tint_progress = Color(1, 1, 1, 0.96862745)
+script = ExtResource("5_cgfq5")
 
 [node name="GameChange" type="Panel" parent="." unique_id=1779493643]
 layout_mode = 1
@@ -180,6 +205,8 @@ offset_right = 20.0
 offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_colors/font_color = Color(0.82, 0.14760001, 0.14760001, 1)
+theme_override_fonts/font = ExtResource("2_7dvkv")
 theme_override_font_sizes/font_size = 32
 text = "You Died!"
 horizontal_alignment = 1
@@ -193,16 +220,16 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -108.0
-offset_top = 26.0
-offset_right = 108.0
-offset_bottom = 49.0
+offset_left = -155.0
+offset_top = 24.666656
+offset_right = 155.0
+offset_bottom = 50.333313
 grow_horizontal = 2
 grow_vertical = 2
-text = "press 'space' to go to main menu"
+text = "Press 'SPACE' to go to Main menu"
+label_settings = SubResource("LabelSettings_p2yx8")
 horizontal_alignment = 1
 vertical_alignment = 1
-uppercase = true
 
 [node name="MainMenu" type="Control" parent="." unique_id=1977315906]
 layout_mode = 1
@@ -212,6 +239,17 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="ColorRect" type="TextureRect" parent="MainMenu" unique_id=208610289]
+layout_mode = 0
+offset_left = 180.0
+offset_top = 32.0
+offset_right = 427.0
+offset_bottom = 279.0
+scale = Vector2(1.1450673, 1.1450673)
+texture = ExtResource("8_6rmj2")
+expand_mode = 5
+stretch_mode = 3
+
 [node name="VBoxContainer" type="VBoxContainer" parent="MainMenu" unique_id=970322632]
 layout_mode = 1
 anchors_preset = 8
@@ -219,36 +257,51 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -94.5
-offset_top = -40.0
-offset_right = 94.5
-offset_bottom = 40.0
+offset_left = -460.0
+offset_top = -26.0
+offset_right = -213.0
+offset_bottom = 61.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="MainMenuLabel" type="Label" parent="MainMenu/VBoxContainer" unique_id=1071009596]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_7dvkv")
 theme_override_font_sizes/font_size = 32
 text = "Main Menu"
 horizontal_alignment = 1
 vertical_alignment = 1
-uppercase = true
 
 [node name="StartButton" type="Button" parent="MainMenu/VBoxContainer" unique_id=962269968]
 layout_mode = 2
+offset_transform_enabled = true
+offset_transform_scale = Vector2(1.1, 1.1)
 text = "START"
+icon_alignment = 1
+expand_icon = true
 
-[node name="Settings_button" type="Button" parent="." unique_id=72721753]
-layout_mode = 0
-offset_left = 25.0
-offset_top = 20.0
-offset_right = 1699.0
-offset_bottom = 1694.0
-scale = Vector2(0.02, 0.02)
-size_flags_horizontal = 6
-size_flags_vertical = 6
-theme_override_styles/normal = SubResource("StyleBoxFlat_x4jx1")
-icon = ExtResource("3_wm3ai")
+[node name="SettingsButton" type="Button" parent="MainMenu/VBoxContainer" unique_id=77389749]
+layout_mode = 2
+offset_transform_enabled = true
+text = "SETTINGS"
+icon_alignment = 1
+expand_icon = true
+
+[node name="credits" type="RichTextLabel" parent="MainMenu" unique_id=1796013019]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -264.0
+offset_top = -43.0
+offset_right = -29.0
+offset_bottom = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_font_sizes/normal_font_size = 10
+text = "A game by: ShaphiraPanda, Marbearis & Phenosi"
 
 [node name="SfxClick" type="AudioStreamPlayer" parent="." unique_id=818416569]
 stream = ExtResource("3_gdt2y")
@@ -256,6 +309,7 @@ bus = &"SFX"
 
 [node name="SfxReturn" type="AudioStreamPlayer" parent="." unique_id=393197755]
 stream = ExtResource("4_wm3ai")
+volume_db = -12.0
 bus = &"SFX"
 
 [node name="Settings_menu" type="Control" parent="." unique_id=1621554129]
@@ -282,9 +336,10 @@ anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -5.0
 offset_top = 12.0
-offset_right = 124.0
-offset_bottom = 46.0
+offset_right = 181.0
+offset_bottom = 51.0
 grow_horizontal = 2
+theme_override_fonts/normal_font = ExtResource("2_7dvkv")
 theme_override_font_sizes/normal_font_size = 24
 text = "SETTINGS"
 fit_content = true
@@ -356,9 +411,22 @@ grow_vertical = 0
 theme_override_font_sizes/font_size = 24
 text = "BACK"
 
+[node name="GlassRain_Layer" type="CanvasLayer" parent="." unique_id=1436983299]
+process_mode = 4
+layer = 0
+
+[node name="GlassRain" type="ColorRect" parent="GlassRain_Layer" unique_id=1814466303]
+material = SubResource("ShaderMaterial_p7vwb")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+metadata/_edit_use_anchors_ = true
+
 [connection signal="pressed" from="MainMenu/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
-[connection signal="pressed" from="Settings_button" to="." method="_on_settings_pressed"]
-[connection signal="pressed" from="Settings_button" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="MainMenu/VBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="value_changed" from="Settings_menu/Smenu/VBoxContainer/MusicVolume" to="." method="_on_music_volume_value_changed"]
 [connection signal="toggled" from="Settings_menu/Smenu/VBoxContainer/MuteMusicCheckbox" to="." method="_on_mute_music_checkbox_toggled"]
 [connection signal="value_changed" from="Settings_menu/Smenu/VBoxContainer/SFXVolume" to="." method="_on_sfx_volume_value_changed"]

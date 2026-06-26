@@ -43,6 +43,7 @@ func start_game() -> void:
 	
 	get_tree().change_scene_to_file("res://scenes/scene_manager.tscn")
 	await get_tree().scene_changed
+	ui.glass_rain_layer.visible = true
 	game.visible = true
 
 func go_to_Settings_menu() -> void:
@@ -53,6 +54,7 @@ func go_to_Settings_menu() -> void:
 	ui.settings_button.visible = false
 	ui.game_change.visible = false
 	ui.player_speed_bar.visible = false
+	ui.player_speed_bar_tex.visible = false
 	ui.octopus_health_bar.visible = false
 	ui.ramming_label.visible = false
 
@@ -61,11 +63,12 @@ func go_to_main_menu()-> void:
 	
 	ui.main_menu.visible = true
 	ui.settings_button.visible = true
-	
+	ui.glass_rain_layer.visible = false
 	game.visible = false
 	ui.settings_menu.visible = false
 	ui.game_change.visible = false
 	ui.player_speed_bar.visible = false
+	ui.player_speed_bar_tex.visible = false
 	ui.octopus_health_bar.visible = false
 	ui.ramming_label.visible = false
 	
@@ -76,6 +79,7 @@ func die() -> void:
 	ui.change_label("You Died!")
 	ui.game_change.visible = true
 	ui.player_speed_bar.visible = false
+	ui.player_speed_bar_tex.visible = false
 	ui.octopus_health_bar.visible = false
 	ui.ramming_label.visible = false
 
@@ -85,6 +89,7 @@ func won() -> void:
 	ui.change_label("You Won!")
 	ui.game_change.visible = true
 	ui.player_speed_bar.visible = false
+	ui.player_speed_bar_tex.visible = false
 	ui.octopus_health_bar.visible = false
 	ui.ramming_label.visible = false
 

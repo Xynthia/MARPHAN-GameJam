@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://osvdmrw47h04"
-path.s3tc="res://.godot/imported/water_water1_Normal.png-44738c925f4e45877aa3d50910fadc5d.s3tc.ctex"
+uid="uid://wgdkhdd2b6mf"
+path.s3tc="res://.godot/imported/vikingShip1_DefaultMaterial_OcclusionRoughnessMetallic.png-93c8931c0e1426cd1db06903ced876dd.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/models/water1/water_water1_Normal.png"
-dest_files=["res://.godot/imported/water_water1_Normal.png-44738c925f4e45877aa3d50910fadc5d.s3tc.ctex"]
+source_file="res://assets/textures/shiptextures/vikingShip1_DefaultMaterial_OcclusionRoughnessMetallic.png"
+dest_files=["res://.godot/imported/vikingShip1_DefaultMaterial_OcclusionRoughnessMetallic.png-93c8931c0e1426cd1db06903ced876dd.s3tc.ctex"]
 
 [params]
 
@@ -22,12 +22,12 @@ compress/lossy_quality=0.7
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
-compress/normal_map=1
+compress/normal_map=0
 compress/channel_pack=0
 mipmaps/generate=true
 mipmaps/limit=-1
-roughness/mode=1
-roughness/src_normal="res://assets/models/water1/water_water1_Normal.png"
+roughness/mode=0
+roughness/src_normal=""
 process/channel_remap/red=0
 process/channel_remap/green=1
 process/channel_remap/blue=2

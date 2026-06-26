@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bvj7g07wuahb4"
-path.s3tc="res://.godot/imported/water_water1_BaseColor.png-8a9ccd5fa95421fb78c5c1582738e377.s3tc.ctex"
+uid="uid://bl3w0m2yyuop"
+path.s3tc="res://.godot/imported/RUNE_SpeedRune_OcclusionRoughnessMetallic.png-f2d437a8cd68e6198a9c246b94f4c8fb.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/models/water1/water_water1_BaseColor.png"
-dest_files=["res://.godot/imported/water_water1_BaseColor.png-8a9ccd5fa95421fb78c5c1582738e377.s3tc.ctex"]
+source_file="res://assets/textures/speedrunetexture/RUNE_SpeedRune_OcclusionRoughnessMetallic.png"
+dest_files=["res://.godot/imported/RUNE_SpeedRune_OcclusionRoughnessMetallic.png-f2d437a8cd68e6198a9c246b94f4c8fb.s3tc.ctex"]
 
 [params]
 
