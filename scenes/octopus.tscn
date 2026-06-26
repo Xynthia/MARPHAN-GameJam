@@ -1,0 +1,96 @@
+[gd_scene format=3 uid="uid://bjjpkpicxutsa"]
+
+[ext_resource type="Script" uid="uid://byd1ep8k6b7j1" path="res://script/octopus.gd" id="1_enbs0"]
+[ext_resource type="PackedScene" uid="uid://bbvfrknungcc6" path="res://scenes/monstie_combo_wanims.tscn" id="3_fhwgg"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_24de5"]
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.81057054, 0.48096758, 1, 1)
+
+[sub_resource type="Animation" id="Animation_lmf8n"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CSGBox3D3:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 1.2, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_enbs0"]
+resource_name = "arm up"
+
+[sub_resource type="Animation" id="Animation_ionst"]
+resource_name = "close_mouth"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CSGBox3D3:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 2.2, 0), Vector3(0, 1.2, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_fhwgg"]
+resource_name = "open_mouth"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CSGBox3D3:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 1.2, 0), Vector3(0, 2.2, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_w6hxi"]
+resource_name = "slam_down"
+length = 0.3
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fhwgg"]
+_data = {
+&"RESET": SubResource("Animation_lmf8n"),
+&"arm up": SubResource("Animation_enbs0"),
+&"close_mouth": SubResource("Animation_ionst"),
+&"open_mouth": SubResource("Animation_fhwgg"),
+&"slam_down": SubResource("Animation_w6hxi")
+}
+
+[node name="Octopus" type="Node3D" unique_id=960680343]
+script = ExtResource("1_enbs0")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="." unique_id=68289608]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+visible = false
+size = Vector3(5, 2.5, 5)
+material = SubResource("StandardMaterial3D_24de5")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=910726253]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.2, 0)
+visible = false
+size = Vector3(5, 2.5, 5)
+material = SubResource("StandardMaterial3D_24de5")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1024259226]
+libraries/ = SubResource("AnimationLibrary_fhwgg")
+
+[node name="SFX" type="AudioStreamPlayer3D" parent="." unique_id=1946922062]
+process_mode = 3
+bus = &"SFX"
+
+[node name="monstie_combo_wanims" parent="." unique_id=538648148 instance=ExtResource("3_fhwgg")]
+transform = Transform3D(-0.27, 0, 2.360415e-08, 0, 0.27, 0, -2.360415e-08, 0, -0.27, 0, 0, 0)

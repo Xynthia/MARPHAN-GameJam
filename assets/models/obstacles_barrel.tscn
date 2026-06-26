@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://bibw6fbng06nd"]
+
+[ext_resource type="PackedScene" uid="uid://cdyuon3o6oyvk" path="res://assets/models/obstacles_barrel.fbx" id="1_xbfi0"]
+[ext_resource type="Material" uid="uid://bi2f315lki4m2" path="res://materials/ObstaclesMat.tres" id="2_22nfa"]
+
+[node name="obstacles_barrel" unique_id=1291757359 instance=ExtResource("1_xbfi0")]
+
+[node name="Cylinder" parent="." index="0" unique_id=1513325015]
+surface_material_override/0 = ExtResource("2_22nfa")

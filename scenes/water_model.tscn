@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://bltsqsfnk2n8"]
+
+[ext_resource type="PackedScene" uid="uid://2eng7m3ss7kw" path="res://assets/models/watertest.fbx" id="1_dcb02"]
+[ext_resource type="Texture2D" uid="uid://bvj7g07wuahb4" path="res://assets/textures/water1/water_water1_BaseColor.png" id="2_kq8ji"]
+[ext_resource type="Texture2D" uid="uid://osvdmrw47h04" path="res://assets/textures/water1/water_water1_Normal.png" id="3_j6pts"]
+[ext_resource type="Texture2D" uid="uid://doiw45tkw0x0f" path="res://assets/textures/water1/water_water1_OcclusionRoughnessMetallic.png" id="4_vdhmo"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vy2l4"]
+albedo_texture = ExtResource("2_kq8ji")
+roughness_texture = ExtResource("4_vdhmo")
+normal_enabled = true
+normal_texture = ExtResource("3_j6pts")
+
+[node name="water_model" unique_id=467535732 instance=ExtResource("1_dcb02")]
+
+[node name="Plane" parent="." index="0" unique_id=676984167]
+surface_material_override/0 = SubResource("StandardMaterial3D_vy2l4")

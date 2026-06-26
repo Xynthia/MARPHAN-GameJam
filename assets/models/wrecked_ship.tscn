@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://bmkvfl6p3iwcj"]
+
+[ext_resource type="PackedScene" uid="uid://8umoxpeubg75" path="res://assets/models/wreckedShip.fbx" id="1_3r1kt"]
+[ext_resource type="Material" uid="uid://db86qmm1jr4vc" path="res://materials/VikingShipMat.tres" id="2_cg4qv"]
+
+[node name="wreckedShip" unique_id=1160179015 instance=ExtResource("1_3r1kt")]
+
+[node name="Cube_004" parent="." index="0" unique_id=1940875462]
+surface_material_override/0 = ExtResource("2_cg4qv")

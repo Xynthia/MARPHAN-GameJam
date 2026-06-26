@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://c1140c7sw1meb"]
+
+[ext_resource type="PackedScene" uid="uid://dpmfo4g4n6bat" path="res://assets/models/RUNE.fbx" id="1_4xlve"]
+[ext_resource type="Texture2D" uid="uid://bae2w8qq6pd5f" path="res://assets/textures/speedrunetexture/RUNE_SpeedRune_BaseColor.png" id="2_hqsqa"]
+[ext_resource type="Texture2D" uid="uid://vcijlsgbthx5" path="res://assets/textures/speedrunetexture/RUNE_SpeedRune_Emissive.png" id="3_echyu"]
+[ext_resource type="Texture2D" uid="uid://cbdwtss6d1yr1" path="res://assets/textures/speedrunetexture/RUNE_SpeedRune_Normal.png" id="4_7wkl6"]
+[ext_resource type="Texture2D" uid="uid://bl3w0m2yyuop" path="res://assets/textures/speedrunetexture/RUNE_SpeedRune_OcclusionRoughnessMetallic.png" id="5_rh3jy"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jqmno"]
+albedo_texture = ExtResource("2_hqsqa")
+roughness_texture = ExtResource("5_rh3jy")
+emission_enabled = true
+emission_texture = ExtResource("3_echyu")
+normal_enabled = true
+normal_texture = ExtResource("4_7wkl6")
+
+[node name="RUNE" unique_id=968415628 instance=ExtResource("1_4xlve")]
+
+[node name="Cube" parent="." index="0" unique_id=1770556273]
+surface_material_override/0 = SubResource("StandardMaterial3D_jqmno")

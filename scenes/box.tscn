@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://2h5go3uqh1pv"]
+
+[ext_resource type="Script" uid="uid://bvsg1fxhpnbhr" path="res://script/box.gd" id="1_3inec"]
+[ext_resource type="PackedScene" uid="uid://bmkvfl6p3iwcj" path="res://assets/models/wrecked_ship.tscn" id="4_brpd5"]
+[ext_resource type="PackedScene" uid="uid://bibw6fbng06nd" path="res://assets/models/obstacles_barrel.tscn" id="4_ry43h"]
+[ext_resource type="PackedScene" uid="uid://cvtjk1cm1jtcr" path="res://assets/models/obstacles_crate.tscn" id="4_telwu"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_swqr5"]
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.3044851, 0.13986096, 2.4065375e-08, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_24de5"]
+
+[node name="Box" type="Area3D" unique_id=1728740162 groups=["Box"]]
+collision_mask = 32768
+script = ExtResource("1_3inec")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=668260898]
+material_override = SubResource("StandardMaterial3D_swqr5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1188238682]
+shape = SubResource("BoxShape3D_24de5")
+
+[node name="obstacles_crate" parent="." unique_id=297988467 instance=ExtResource("4_telwu")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
+
+[node name="obstacles_wreckedShip" parent="." unique_id=1160179015 instance=ExtResource("4_brpd5")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
+
+[node name="obstacles_barrel" parent="." unique_id=1291757359 instance=ExtResource("4_ry43h")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

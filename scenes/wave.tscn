@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://bwkrwr46mhs6x"]
+
+[ext_resource type="Script" uid="uid://du8qb2edetgkl" path="res://script/wave.gd" id="1_y5ysc"]
+[ext_resource type="PackedScene" uid="uid://bltsqsfnk2n8" path="res://scenes/water_model.tscn" id="2_h2l3e"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_y5ysc"]
+radius = 1.0
+height = 9.384766
+
+[node name="Wave" type="Area3D" unique_id=576208127 groups=["Wave"]]
+collision_mask = 32768
+script = ExtResource("1_y5ysc")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=760655614]
+visible = false
+size = Vector3(0.1, 1.4943848, 4)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=726056149]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_y5ysc")
+
+[node name="water_model" parent="." unique_id=467535732 instance=ExtResource("2_h2l3e")]
+transform = Transform3D(-8.742278e-09, 0, -0.2, 0, 0.2, 0, 0.2, 0, -8.742278e-09, 0, 0.27979338, 0)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

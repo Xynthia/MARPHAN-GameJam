@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://df0i7ln4ux53"
+path="res://.godot/imported/Epic Stock Media - Ambient Nature - High Seas Strong Wind .wav-11101fdc5c4ed4ffa20798a68c29c819.sample"
+
+[deps]
+
+source_file="res://assets/audio/Epic Stock Media - Ambient Nature - High Seas Strong Wind .wav"
+dest_files=["res://.godot/imported/Epic Stock Media - Ambient Nature - High Seas Strong Wind .wav-11101fdc5c4ed4ffa20798a68c29c819.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=2
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

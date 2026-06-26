@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://c3ry4r5ygg5i0"]
+
+[ext_resource type="Script" uid="uid://btvg5a537wtj" path="res://script/rune.gd" id="1_024sg"]
+[ext_resource type="PackedScene" uid="uid://c1140c7sw1meb" path="res://scenes/rune_model.tscn" id="2_ou4tv"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_24de5"]
+vertex_color_use_as_albedo = true
+albedo_color = Color(0, 0.8486628, 0.90715295, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_24de5"]
+
+[node name="Rune" type="Area3D" unique_id=1227468790]
+collision_mask = 32768
+script = ExtResource("1_024sg")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1162315657]
+visible = false
+material = SubResource("StandardMaterial3D_24de5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1718483386]
+shape = SubResource("BoxShape3D_24de5")
+
+[node name="RUNE" parent="." unique_id=968415628 instance=ExtResource("2_ou4tv")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
