@@ -22,6 +22,7 @@ func _ready() -> void:
 	ramming_label.visible = false
 	game_change.visible = false
 	settings_menu.visible = false
+	settings_button.visible = false
 	main_menu.visible = false
 	octopus_health_bar.max_value = Main.octopus.max_health
 	player_speed_bar.max_value = Main.wave_manager.waves[0].max_speed

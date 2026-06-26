@@ -14,6 +14,8 @@ var _positions: PackedVector3Array = PackedVector3Array()
 var _radii: PackedFloat32Array = PackedFloat32Array()
 var _time: float = 0.0
 
+@onready var octopus: Octupus = $"../../Octopus"
+
 func _ready() -> void:
 	_positions.resize(MAX_INTERACTIONS)
 	_radii.resize(MAX_INTERACTIONS)
@@ -46,7 +48,10 @@ func _push_interactions() -> void:
 			_positions[i] = tracked_objects[i].global_position
 			# smooth per object pulse, sine over time
 			var pulse: float = 1.0 + pulse_amount * sin(_time * pulse_speed + float(i) * 1.7)
-			_radii[i] = foam_radius * pulse
+			if (tracked_objects[i]) == octopus:
+				_radii[i] = (foam_radius + 3) * pulse
+			else:
+				_radii[i] = (foam_radius + 0) * pulse
 		else:
 			_positions[i] = Vector3.ZERO
 			_radii[i] = 0.0

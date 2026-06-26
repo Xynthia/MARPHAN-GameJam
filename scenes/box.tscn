@@ -1,6 +1,9 @@
 [gd_scene format=3 uid="uid://2h5go3uqh1pv"]
 
 [ext_resource type="Script" uid="uid://bvsg1fxhpnbhr" path="res://script/box.gd" id="1_3inec"]
+[ext_resource type="PackedScene" uid="uid://bmkvfl6p3iwcj" path="res://assets/models/wrecked_ship.tscn" id="4_brpd5"]
+[ext_resource type="PackedScene" uid="uid://bibw6fbng06nd" path="res://assets/models/obstacles_barrel.tscn" id="4_ry43h"]
+[ext_resource type="PackedScene" uid="uid://cvtjk1cm1jtcr" path="res://assets/models/obstacles_crate.tscn" id="4_telwu"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_swqr5"]
 vertex_color_use_as_albedo = true
@@ -20,5 +23,12 @@ shape = SubResource("BoxShape3D_24de5")
 
 [node name="SFX" type="AudioStreamPlayer3D" parent="." unique_id=542956672]
 bus = &"SFX"
+
+[node name="obstacles_crate" parent="." unique_id=297988467 instance=ExtResource("4_telwu")]
+
+[node name="obstacles_wreckedShip" parent="." unique_id=1160179015 instance=ExtResource("4_brpd5")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+
+[node name="obstacles_barrel" parent="." unique_id=1291757359 instance=ExtResource("4_ry43h")]
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

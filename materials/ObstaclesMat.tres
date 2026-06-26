@@ -1,0 +1,12 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://bi2f315lki4m2"]
+
+[ext_resource type="Texture2D" uid="uid://rt0j45ojedi3" path="res://assets/textures/obstacleTextures/obstacles_wood_BaseColor.png" id="1_mbj7o"]
+[ext_resource type="Texture2D" uid="uid://coy2gvdpgcrx4" path="res://assets/textures/obstacleTextures/obstacles_wood_OcclusionRoughnessMetallic.png" id="2_7d5ae"]
+[ext_resource type="Texture2D" uid="uid://3skq23p01ljg" path="res://assets/textures/obstacleTextures/obstacles_wood_Normal.png" id="3_436lx"]
+
+[resource]
+albedo_texture = ExtResource("1_mbj7o")
+normal_enabled = true
+normal_texture = ExtResource("3_436lx")
+ao_enabled = true
+ao_texture = ExtResource("2_7d5ae")
