@@ -44,6 +44,8 @@ var start_pos : Vector3
 
 var attacking : bool = false
 
+var last_dir : Vector3 
+
 var moving : bool = false :
 	set(value):
 		moving = value
@@ -174,7 +176,31 @@ func move_lane(dir : Vector3) -> void:
 	var bank_dir : float = self.rotation_degrees.z
 	var pitch_amount = randi_range(min_pitch_amount, max_pitch_amount)
 	
-	if !moving:
+	if moving:
+		if last_dir == dir:
+			return
+		else:
+			match current_lane:
+				lanes.LEFT:
+					next_lane = lanes.LEFT
+					move_dir = 10
+					move_foward_dir = 5
+					turn_dir += randi_range(min_turn_amount ,max_turn_amount)
+					bank_dir += randi_range(min_bank_amount ,max_bank_amount)
+				lanes.MIDDLE:
+					next_lane = lanes.MIDDLE
+					move_dir = 15
+					move_foward_dir = 10
+					turn_dir -= randi_range(min_turn_amount ,max_turn_amount)
+					bank_dir -= randi_range(min_bank_amount ,max_bank_amount)
+				lanes.RIGHT:
+					next_lane = lanes.RIGHT
+					move_dir = 20
+					move_foward_dir = 15
+					turn_dir -= randi_range(min_turn_amount ,max_turn_amount)
+					bank_dir -= randi_range(min_bank_amount ,max_bank_amount)
+	else:
+		last_dir = dir
 		moving = true
 		match current_lane:
 			lanes.LEFT:
@@ -207,26 +233,7 @@ func move_lane(dir : Vector3) -> void:
 						move_foward_dir = 10
 						turn_dir += randi_range(min_turn_amount ,max_turn_amount)
 						bank_dir += randi_range(min_bank_amount ,max_bank_amount)
-	else:
-		match current_lane:
-			lanes.LEFT:
-				next_lane = lanes.LEFT
-				move_dir = 10
-				move_foward_dir = 5
-				turn_dir += randi_range(min_turn_amount ,max_turn_amount)
-				bank_dir += randi_range(min_bank_amount ,max_bank_amount)
-			lanes.MIDDLE:
-				next_lane = lanes.MIDDLE
-				move_dir = 15
-				move_foward_dir = 10
-				turn_dir -= randi_range(min_turn_amount ,max_turn_amount)
-				bank_dir -= randi_range(min_bank_amount ,max_bank_amount)
-			lanes.RIGHT:
-				next_lane = lanes.RIGHT
-				move_dir = 20
-				move_foward_dir = 15
-				turn_dir -= randi_range(min_turn_amount ,max_turn_amount)
-				bank_dir -= randi_range(min_bank_amount ,max_bank_amount)
+	
 	
 	if next_lane != null:
 		var new_move = Vector3(move_dir, 0, move_foward_dir)

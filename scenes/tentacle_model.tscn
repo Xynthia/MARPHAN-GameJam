@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://bg53hi62beard"]
+
+[ext_resource type="PackedScene" uid="uid://c2628keiudvfl" path="res://assets/models/tentacle.glb" id="1_2v7oq"]
+[ext_resource type="Script" uid="uid://qt5kjejdgcld" path="res://script/tentacle_model.gd" id="2_pox8g"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_pox8g"]
+height = 500.0
+radius = 25.0
+
+[node name="tentacle_model" unique_id=1297748310 instance=ExtResource("1_2v7oq")]
+script = ExtResource("2_pox8g")
+
+[node name="Skeleton3D" parent="tentacle" parent_id_path=PackedInt32Array(776033958) index="0" unique_id=262417337]
+bones/1/rotation = Quaternion(-2.2143926e-08, -3.6052345e-08, -0.6684521, 0.7437553)
+bones/2/rotation = Quaternion(-1.7937955e-08, -1.3394437e-07, -0.051127847, 0.99869215)
+bones/3/position = Vector3(2.0653235e-07, 123.39271, -3.001339e-12)
+bones/3/rotation = Quaternion(-1.482614e-08, -5.5649846e-08, -0.027423523, 0.9996239)
+bones/4/position = Vector3(2.8389115e-07, 114.70171, -1.5904865e-12)
+bones/4/rotation = Quaternion(7.306547e-09, 8.2248846e-08, 0.014213703, 0.99989897)
+bones/5/position = Vector3(-1.3417452e-06, 78.79164, -8.906411e-13)
+bones/5/rotation = Quaternion(-2.8113363e-09, 1.4161499e-07, -0.009688563, 0.99995315)
+
+[node name="BoneAttachment3D" type="BoneAttachment3D" parent="tentacle/Skeleton3D" index="0" unique_id=803848860]
+transform = Transform3D(0.104298145, 0.9945461, -2.2678716e-08, -0.9945461, 0.104298145, 5.1750284e-08, 5.3833382e-08, 1.7157566e-08, 1, 0.0035218303, 0.999955, 2.6091197e-05)
+bone_name = "tentacle"
+bone_idx = 1
+
+[node name="Area3D" type="Area3D" parent="tentacle/Skeleton3D/BoneAttachment3D" index="0" unique_id=282600905]
+collision_mask = 32768
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="tentacle/Skeleton3D/BoneAttachment3D/Area3D" index="0" unique_id=130248025]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 250, 0)
+shape = SubResource("CylinderShape3D_pox8g")
+debug_color = Color(0.9764706, 0, 0.40392157, 1)
+
+[node name="SFX" type="AudioStreamPlayer3D" parent="tentacle/Skeleton3D/BoneAttachment3D" index="1" unique_id=1111708734]
+transform = Transform3D(0.10429813, -0.994546, 5.3833382e-08, 0.994546, 0.10429813, 1.7157566e-08, -2.2678707e-08, 5.1750273e-08, 1, 51.50707, 481.56372, -3.7126454e-05)
+bus = &"SFX"
+
+[connection signal="body_entered" from="tentacle/Skeleton3D/BoneAttachment3D/Area3D" to="." method="_on_area_3d_body_entered"]

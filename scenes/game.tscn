@@ -11,9 +11,13 @@
 [ext_resource type="Script" uid="uid://15gav1gyar0y" path="res://materials/shaders/water_interaction_component.gd" id="6_qnb83"]
 [ext_resource type="Script" uid="uid://b8gdvv2oxuihj" path="res://script/tentacle_manager.gd" id="6_trtic"]
 [ext_resource type="Script" uid="uid://cg1eq3fea6j1n" path="res://script/spawn_manager.gd" id="7_ir15t"]
+[ext_resource type="Shader" uid="uid://dsqelj8u1skim" path="res://materials/shaders/Waves.gdshader" id="9_e1j6l"]
 [ext_resource type="Shader" uid="uid://dwub6ey157607" path="res://materials/shaders/Overcast.gdshader" id="15_sgl2t"]
-[ext_resource type="Texture2D" uid="uid://cho1hcpqcl0ef" path="res://assets/textures/waves/836f54b5ec6effccfe450922f05ed3fdc8013bc8.jpeg" id="16_qouja"]
+[ext_resource type="Shader" uid="uid://bk2tw5fyhtui8" path="res://materials/shaders/glassRain_Canvas.gdshader" id="23_nepv3"]
 [ext_resource type="AudioStream" uid="uid://c4qm5n4wti1pp" path="res://assets/audio/SeaAmb_loop.ogg" id="24_7025r"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ir15t"]
+load_path = "res://.godot/imported/836f54b5ec6effccfe450922f05ed3fdc8013bc8.jpeg-e0bf453ef7e90deab70dce22896244ca.s3tc.ctex"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8ool0"]
 shader = ExtResource("15_sgl2t")
@@ -25,7 +29,7 @@ shader_parameter/cloud_color = Color(0.18899515, 0.27086967, 0.35733193, 1)
 shader_parameter/cloud_density = 5.0
 shader_parameter/cloud_depth = 5.0
 shader_parameter/cloud_sag = -0.09
-shader_parameter/noise_texture = ExtResource("16_qouja")
+shader_parameter/noise_texture = SubResource("CompressedTexture2D_ir15t")
 shader_parameter/noise_tiling = Vector2(1, 1)
 shader_parameter/wind_speed = Vector2(0.5, 0.5)
 shader_parameter/ground_bottom_color = Color(1, 1, 1, 1)
@@ -66,15 +70,15 @@ size = Vector2(50, 50)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qnb83"]
 render_priority = 0
 shader = ExtResource("6_bhx41")
-shader_parameter/water_tint = Color(0.024000006, 0.32040006, 0.48, 1)
-shader_parameter/water_tint_2 = Color(0.18200001, 0.47493336, 0.52, 1)
-shader_parameter/color_shallow = Color(0.17980002, 0.62, 0.4219101, 1)
-shader_parameter/color_deep = Color(0.015000001, 0.10899997, 0.25, 1)
+shader_parameter/water_tint = Color(0.04, 0.38, 0.78, 1)
+shader_parameter/water_tint_2 = Color(0.03, 0.3, 0.62, 1)
+shader_parameter/color_shallow = Color(0.18, 0.55, 0.62, 1)
+shader_parameter/color_deep = Color(0.02, 0.14, 0.32, 1)
 shader_parameter/foam_color = Color(0.85, 0.95, 0.97, 1)
 shader_parameter/wave_amplitude = 0.350000016625
 shader_parameter/wave_frequency = 5.00000023424012
 shader_parameter/wave_speed = 1.0
-shader_parameter/chop = 0.650000030875
+shader_parameter/chop = 0.50000002375
 shader_parameter/faceted_normals = false
 shader_parameter/surface_scale = 25.00000116375
 shader_parameter/surface_flow_speed = 0.15
@@ -114,6 +118,81 @@ height = 10.312637
 radius = 1.6884766
 height = 6.0254593
 
+[sub_resource type="CompressedTexture2DArray" id="CompressedTexture2DArray_ca42v"]
+load_path = "res://.godot/imported/caustic.png-262ae7493d3e82783db74d67da87eff9.s3tc.ctexarray"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_rysoc"]
+load_path = "res://.godot/imported/foam_albedo.png-c3e78f0fbe3e49d44886a56e86fd70e4.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ssvqc"]
+load_path = "res://.godot/imported/normal_A.png-90b80479929f35cff025498e42b813ac.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_264po"]
+load_path = "res://.godot/imported/normal_B.png-75fe3afb052a22767c50393a2371c968.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_1kice"]
+load_path = "res://.godot/imported/uv_example.png-58d9ad0325b30694eae3fd189814a730.s3tc.ctex"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nuacq"]
+render_priority = 0
+shader = ExtResource("9_e1j6l")
+shader_parameter/wave_1 = Vector4(0.3, 4, 0.2, 1)
+shader_parameter/wave_2 = Vector4(-0.26, -0.19, 0.01, 2)
+shader_parameter/wave_3 = Vector4(-7.67, 5.63, 0.1, 3)
+shader_parameter/wave_4 = Vector4(-0.42, -1.63, 0.1, 4)
+shader_parameter/wave_5 = Vector4(1.66, 0.07, 0.15, 5)
+shader_parameter/wave_6 = Vector4(1.2, 1.14, 0.01, 1)
+shader_parameter/wave_7 = Vector4(-1.6, 7.3, 0.11, 2)
+shader_parameter/wave_8 = Vector4(-0.42, -1.63, 0.15, 3)
+shader_parameter/time_factor = 2.5
+shader_parameter/noise_zoom = 2.0
+shader_parameter/noise_amp = 1.0
+shader_parameter/base_water_color = Color(0.70980394, 0.827451, 0.8352941, 1)
+shader_parameter/fresnel_water_color = Color(0.35686275, 0.7176471, 0.74509805, 1)
+shader_parameter/deep_water_color = Color(0.05490196, 0.12941177, 0.19607843, 1)
+shader_parameter/shallow_water_color = Color(0.12941177, 0.6313726, 0.6666667, 1)
+shader_parameter/beers_law = 0.5
+shader_parameter/depth_offset = -1.2
+shader_parameter/near = 7.0
+shader_parameter/far = 10000.0
+shader_parameter/edge_texture_scale = 3.5
+shader_parameter/edge_texture_offset = 1.0
+shader_parameter/edge_texture_speed = 0.1
+shader_parameter/edge_foam_intensity = 2.0
+shader_parameter/edge_fade_start = -3.0
+shader_parameter/edge_fade_end = 6.6
+shader_parameter/edge_foam_texture = SubResource("CompressedTexture2D_rysoc")
+shader_parameter/peak_height_threshold = 1.0
+shader_parameter/peak_color = Vector3(1, 1, 1)
+shader_parameter/peak_intensity = 1.0
+shader_parameter/foam_texture = SubResource("CompressedTexture2D_rysoc")
+shader_parameter/foam_intensity = 1.0
+shader_parameter/foam_scale = 1.0
+shader_parameter/metallic = 0.6
+shader_parameter/roughness = 0.045
+shader_parameter/uv_scale_text_a = 0.1
+shader_parameter/uv_speed_text_a = Vector2(0.42, 0.3)
+shader_parameter/uv_scale_text_b = 0.6
+shader_parameter/uv_speed_text_b = Vector2(0.15, 0.1)
+shader_parameter/normal_strength = 1.0
+shader_parameter/uv_sampler_scale = 0.3
+shader_parameter/blend_factor = 0.28
+shader_parameter/perturbation_strength = 1.0
+shader_parameter/perturbation_time = 0.3
+shader_parameter/normalmap_a = SubResource("CompressedTexture2D_ssvqc")
+shader_parameter/normalmap_b = SubResource("CompressedTexture2D_264po")
+shader_parameter/uv_sampler = SubResource("CompressedTexture2D_1kice")
+shader_parameter/caustic_sampler = SubResource("CompressedTexture2DArray_ca42v")
+shader_parameter/caustics_intensity = 15.0
+shader_parameter/num_caustic_layers = 16.0
+shader_parameter/caustic_distortion_strength = 0.001
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_m4url"]
+material = SubResource("ShaderMaterial_nuacq")
+size = Vector2(50, 50)
+subdivide_width = 100
+subdivide_depth = 100
+
 [sub_resource type="Curve3D" id="Curve3D_jyhfs"]
 _data = {
 "points": PackedVector3Array(0, 0, 0, 0, 0, 0, -5, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, -5, 0, 0, 0, 10, 0, 10, 0, 0, 0, 0, 0, 0, 10, 0, 20),
@@ -137,6 +216,11 @@ point_count = 5
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_24de5"]
 size = Vector3(7, 1, 12)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7nv0b"]
+shader = ExtResource("23_nepv3")
+shader_parameter/frequency = 0.10000015050212065
+shader_parameter/size = 0.0370000017575
 
 [node name="Game" type="Node3D" unique_id=1114938022]
 script = ExtResource("1_gee14")
@@ -177,6 +261,11 @@ mesh = SubResource("CapsuleMesh_qnb83")
 transform = Transform3D(0.07249999, 0, 0, 0, -3.171068e-09, 0.07403532, 0, -0.07254558, -3.2361867e-09, 0, -0.115356565, 0.21928787)
 layers = 0
 mesh = SubResource("CapsuleMesh_suyxu")
+
+[node name="Waves" type="MeshInstance3D" parent="Player" unique_id=1973598655]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -0.03630638, -0.17280293, -0.04082012)
+visible = false
+mesh = SubResource("PlaneMesh_m4url")
 
 [node name="WaveManager" type="Node3D" parent="." unique_id=465464057]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
@@ -301,6 +390,7 @@ script = ExtResource("4_dinhu")
 script = ExtResource("5_kvuet")
 
 [node name="TentacleManager" type="Node3D" parent="." unique_id=810999940]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 0, 7)
 script = ExtResource("6_trtic")
 
 [node name="SpawnManager" type="Node3D" parent="." unique_id=1434470221]
@@ -311,6 +401,19 @@ script = ExtResource("7_ir15t")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SpawnManager/Area3D" unique_id=213844723]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.318481, 0, -10.117285)
 shape = SubResource("BoxShape3D_24de5")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1571006805]
+process_mode = 4
+
+[node name="GlassRain" type="ColorRect" parent="CanvasLayer" unique_id=828871318]
+material = SubResource("ShaderMaterial_7nv0b")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="SFX_Amb_Sea" type="AudioStreamPlayer2D" parent="." unique_id=663856794]
 stream = ExtResource("24_7025r")

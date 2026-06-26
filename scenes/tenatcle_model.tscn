@@ -2,7 +2,25 @@
 
 [ext_resource type="PackedScene" uid="uid://bbufh6xxx7x22" path="res://assets/models/Tenatcle.fbx" id="1_535s1"]
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_24de5"]
+height = 5.0
+
 [node name="TenatcleModel" unique_id=161717197 instance=ExtResource("1_535s1")]
 
-[node name="SFX" type="AudioStreamPlayer3D" parent="." index="2" unique_id=1932769267]
-bus = &"SFX"
+[node name="Skeleton3D" parent="tentacle2" parent_id_path=PackedInt32Array(150098649) index="0" unique_id=1680218464]
+bones/1/rotation = Quaternion(-4.5764796e-08, -1.4069554e-08, -0.8150494, 0.57939154)
+bones/2/rotation = Quaternion(-1.793796e-08, -1.339444e-07, -0.051127832, 0.99869215)
+bones/3/rotation = Quaternion(-1.4826142e-08, -5.564986e-08, -0.027423508, 0.99962395)
+bones/4/rotation = Quaternion(7.306558e-09, 8.2248846e-08, 0.014213722, 0.999899)
+bones/5/rotation = Quaternion(-2.8113336e-09, 1.4161499e-07, -0.009688573, 0.99995315)
+
+[node name="BoneAttachment3D" type="BoneAttachment3D" parent="tentacle2/Skeleton3D" index="0" unique_id=2086548902]
+transform = Transform3D(-0.33055305, 0.94378763, 5.9385037e-08, 2.134005e-08, 7.0259745e-08, -1, -0.9437875, -0.33055303, -4.336315e-08, 3.52183e-05, -2.618097e-07, 0.009999548)
+bone_name = "tentacle"
+bone_idx = 1
+
+[node name="Area3D" type="Area3D" parent="tentacle2/Skeleton3D/BoneAttachment3D" index="0" unique_id=1304333320]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="tentacle2/Skeleton3D/BoneAttachment3D/Area3D" index="0" unique_id=1238630980]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+shape = SubResource("CylinderShape3D_24de5")

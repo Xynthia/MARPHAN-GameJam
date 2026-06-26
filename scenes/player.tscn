@@ -345,6 +345,10 @@ shader_parameter/magnitude = Vector2(0.005, 0.01)
 collision_layer = 32768
 script = ExtResource("1_3vyb7")
 
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2146015858]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.23724365, -0.08041382)
+shape = SubResource("BoxShape3D_24de5")
+
 [node name="AudioListener3D" type="AudioListener3D" parent="." unique_id=452730888]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.30361557, 1.0808594)
 
@@ -377,10 +381,6 @@ bus = &"Box"
 
 [node name="vikingShip" parent="." unique_id=1916623914 instance=ExtResource("2_qhqgy")]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2146015858]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.23724365, -0.08041382)
-shape = SubResource("BoxShape3D_24de5")
 
 [node name="SpringArm3D" type="SpringArm3D" parent="." unique_id=1982047339]
 transform = Transform3D(1, 0, 0, 0, 0.92733824, 0.3742243, 0, -0.3742243, 0.92733824, -1.433, 0.445, -0.507)
