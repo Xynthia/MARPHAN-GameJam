@@ -35,10 +35,11 @@ func play_hit_player() -> void:
 	await tentacle_model.sfx.finished
 
 func play_hit_water() -> void:
-	tentacle_model.sfx.stream = TENTACLE_HIT_WATER_MISS
-	tentacle_model.sfx.play()
-	await tentacle_model.sfx.finished
+	tentacle_model.sfx_2.play()
+	await tentacle_model.sfx_2.finished
 
 func hit_player() -> void:
 	play_hit_player()
 	Main.slow_down(amount_slow_down)
+	await Main.player.set_camShakesmoothly(2) # hit
+	Main.player.set_camShakesmoothly(0.35) # normal

@@ -2,6 +2,7 @@ extends Node3D
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var sfx: AudioStreamPlayer3D = $tentacle/Skeleton3D/BoneAttachment3D/SFX
+@onready var sfx_2: AudioStreamPlayer3D = $tentacle/Skeleton3D/BoneAttachment3D/SFX2
 
 var parent : Tentacle
 

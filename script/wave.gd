@@ -21,7 +21,9 @@ var speed : float :
 			Main.ramming_speed = true
 		elif Main.ramming_speed == true && speed <= ramming_speed:
 			Main.ramming_speed = false
-		
+
+var speed_Scale : float = (speed / max_speed)
+
 
 @onready var water_model: Node3D = $water_model
 
@@ -52,6 +54,10 @@ func _ready() -> void:
 	speed = start_speed
 
 func _process(delta: float) -> void:
+	speed_Scale = (speed / max_speed)
+	Main.player.set_shader(speed_Scale)
+	Main.game.set_shader(speed_Scale)
+	
 	parent.progress_ratio += delta * speed /100
 
 func idle(is_moving) -> void:

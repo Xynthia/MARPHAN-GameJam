@@ -67,7 +67,7 @@ func _process(delta: float) -> void:
 		mouth_attack_timer += delta
 		if mouth_attack_timer >= random_time_between_attacks:
 			mouth_attack_timer = 0
-			random_time_between_attacks = randf_range(3.0, 10.0)
+			random_time_between_attacks = randf_range(1.0, 3.0)
 			mouth_attack()
 	
 	

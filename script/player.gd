@@ -21,11 +21,19 @@ var hit_audio : Array[AudioStream] = [OBSTACLE_HIT_1, OBSTACLE_HIT_2]
 @onready var sfx_box: AudioStreamPlayer3D = $"SFX Box"
 @onready var cam_shake: ColorRect = $CamShake/ColorRect
 
+@onready var wind: GPUParticles3D = $wind
+@onready var rain: GPUParticles3D = $rain
+@onready var rain_billboard: GPUParticles3D = $rain_Billboard
+@onready var fire: GPUParticles3D = $VFX_FireComp/Fire
+@onready var spark: GPUParticles3D = $VFX_FireComp/Spark
+
 @onready var camera_3d: Camera3D = $SpringArm3D/Camera3D
 
 
 enum lanes {LEFT, MIDDLE, RIGHT}
 var current_lane : lanes = lanes.RIGHT
+
+var camShake_Tween : Tween
 
 var move_amount : float = 5
 var min_turn_amount : int = 7
@@ -67,7 +75,14 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("move right"):
 		move_lane(Vector3.MODEL_RIGHT)
 
-var camShake_Tween : Tween
+func set_shader(value: float):
+	value = (0.75 + value)
+	wind.speed_scale = value
+	rain.speed_scale = value
+	rain_billboard.speed_scale = value
+	fire.speed_scale = value
+	spark.speed_scale = value
+
 func set_camShakesmoothly(target_value: float):
 	if camShake_Tween:
 		camShake_Tween.kill()
@@ -80,6 +95,7 @@ func set_camShakesmoothly(target_value: float):
 		target_value,
 		1
 	).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	await camShake_Tween.finished
 
 func play_start_ram() ->  void:
 	sfx_3.pitch_scale = randf_range(0.9, 1.1)
@@ -92,10 +108,10 @@ func play_audio_hit() -> void:
 	sfx.pitch_scale = randf_range(0.9, 1.1)
 	sfx.play()
 	set_camShakesmoothly(4.0) # heavy
-	await sfx.finished
-	set_camShakesmoothly(0.35) # normal
+	get_tree().create_timer(1.0).timeout
 	sfx_2.pitch_scale = randf_range(0.9, 1.1)
 	sfx_2.play()
+	set_camShakesmoothly(0.35) # normal
 	await sfx_2.finished
 
 func play_pickup() -> void:
@@ -110,8 +126,8 @@ func play_pickup_audio() -> void:
 	sfx_box.stream = hit_audio[rand_id]
 	sfx_box.pitch_scale = randf_range(0.9, 1.1)
 	sfx_box.play()
-	set_camShakesmoothly(1.5) # heavy
 	await sfx_box.finished
+	await set_camShakesmoothly(1.5) # heavy
 	set_camShakesmoothly(0.35) # normal
 
 func animation_idle() -> void:
@@ -134,7 +150,6 @@ func animation_idle() -> void:
 	
 	tween_idle_bank.tween_interval(2)
 	tween_idle_pitch.tween_interval(2)
-
 
 func attack_octupus() -> void:
 	attacking = true
@@ -237,14 +252,14 @@ func move_lane(dir : Vector3) -> void:
 	
 	if next_lane != null:
 		var new_move = Vector3(move_dir, 0, move_foward_dir)
-		tween_move.tween_property(self, "global_position", new_move, 3)
+		tween_move.tween_property(self, "global_position", new_move, 2.25)
 		
 		tween_pitch.set_ease(Tween.EASE_IN)
 		tween_pitch.set_trans(Tween.TRANS_BOUNCE)
 		tween_pitch.tween_property(viking_ship, "rotation_degrees:x", pitch_amount, 3)
 		tween_pitch.set_ease(Tween.EASE_OUT)
 		tween_pitch.chain().tween_property(viking_ship, "rotation_degrees:x", 0, 3)
-	
+
 		tween_turn.set_trans(Tween.TRANS_BACK)
 		# turn left
 		tween_turn.set_ease(Tween.EASE_OUT)

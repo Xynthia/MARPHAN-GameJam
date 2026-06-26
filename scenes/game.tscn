@@ -13,6 +13,9 @@
 [ext_resource type="Script" uid="uid://cg1eq3fea6j1n" path="res://script/spawn_manager.gd" id="7_ir15t"]
 [ext_resource type="Shader" uid="uid://dsqelj8u1skim" path="res://materials/shaders/Waves.gdshader" id="9_e1j6l"]
 [ext_resource type="Shader" uid="uid://dwub6ey157607" path="res://materials/shaders/Overcast.gdshader" id="15_sgl2t"]
+[ext_resource type="AudioStream" uid="uid://df0i7ln4ux53" path="res://assets/audio/Epic Stock Media - Ambient Nature - High Seas Strong Wind .wav" id="16_ca42v"]
+[ext_resource type="AudioStream" uid="uid://rgy8sfmbb20" path="res://assets/audio/music/Jeremy Chontow - The Hunt.mp3" id="17_rysoc"]
+[ext_resource type="AudioStream" uid="uid://bf8kq6twrxh24" path="res://assets/audio/music/Rotem Moav - Blood on the Snow.mp3" id="18_ssvqc"]
 [ext_resource type="Shader" uid="uid://bk2tw5fyhtui8" path="res://materials/shaders/glassRain_Canvas.gdshader" id="23_nepv3"]
 [ext_resource type="AudioStream" uid="uid://c4qm5n4wti1pp" path="res://assets/audio/SeaAmb_loop.ogg" id="24_7025r"]
 
@@ -119,19 +122,14 @@ radius = 1.6884766
 height = 6.0254593
 
 [sub_resource type="CompressedTexture2DArray" id="CompressedTexture2DArray_ca42v"]
-load_path = "res://.godot/imported/caustic.png-262ae7493d3e82783db74d67da87eff9.s3tc.ctexarray"
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_rysoc"]
-load_path = "res://.godot/imported/foam_albedo.png-c3e78f0fbe3e49d44886a56e86fd70e4.s3tc.ctex"
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ssvqc"]
-load_path = "res://.godot/imported/normal_A.png-90b80479929f35cff025498e42b813ac.s3tc.ctex"
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_264po"]
-load_path = "res://.godot/imported/normal_B.png-75fe3afb052a22767c50393a2371c968.s3tc.ctex"
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_1kice"]
-load_path = "res://.godot/imported/uv_example.png-58d9ad0325b30694eae3fd189814a730.s3tc.ctex"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nuacq"]
 render_priority = 0
@@ -417,7 +415,26 @@ metadata/_edit_use_anchors_ = true
 
 [node name="SFX_Amb_Sea" type="AudioStreamPlayer2D" parent="." unique_id=663856794]
 stream = ExtResource("24_7025r")
-volume_db = -9.0
+volume_db = -6.0
+autoplay = true
+bus = &"SFX"
+
+[node name="SFX_Amb_Sea2" type="AudioStreamPlayer2D" parent="." unique_id=1365143906]
+stream = ExtResource("16_ca42v")
+volume_db = -6.0
+autoplay = true
+bus = &"SFX"
+
+[node name="FightMusic" type="AudioStreamPlayer2D" parent="." unique_id=1070191982]
+stream = ExtResource("17_rysoc")
+volume_db = -3.0
+autoplay = true
+bus = &"Music"
+
+[node name="MenuMusic" type="AudioStreamPlayer2D" parent="." unique_id=68618103]
+process_mode = 2
+stream = ExtResource("18_ssvqc")
+volume_db = -3.0
 autoplay = true
 bus = &"Music"
 

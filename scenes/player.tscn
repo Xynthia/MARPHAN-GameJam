@@ -57,6 +57,7 @@ emission_ring_height = 1.0
 emission_ring_radius = 1.0
 emission_ring_inner_radius = 0.0
 emission_ring_cone_angle = 90.0
+spread = 0.0
 directional_velocity_min = 0.9999839
 directional_velocity_max = 49.99998
 directional_velocity_curve = SubResource("CurveXYZTexture_gul0u")
@@ -109,7 +110,7 @@ emission_shape_scale = Vector3(5, 5, 10)
 emission_shape = 3
 emission_box_extents = Vector3(1, 1, 1)
 direction = Vector3(1, 0, 100)
-spread = 44.0
+spread = 59.575
 initial_velocity_min = 5.0
 initial_velocity_max = 5.0
 directional_velocity_min = 1.0
@@ -147,7 +148,7 @@ rings = 1
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_l71n6"]
 particle_flag_align_y = true
-emission_shape_scale = Vector3(20, 8, 20)
+emission_shape_scale = Vector3(10, 10, 20)
 emission_shape = 3
 emission_box_extents = Vector3(1, 1, 1)
 spread = 50.0
@@ -355,15 +356,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.30361557, 1.0808594)
 [node name="SFX" type="AudioStreamPlayer3D" parent="." unique_id=1085038129]
 stream = ExtResource("2_y4r1p")
 volume_db = -6.0
-bus = &"Ship_2"
 
 [node name="SFX2" type="AudioStreamPlayer3D" parent="." unique_id=1227954559]
 stream = ExtResource("3_d2wvv")
-bus = &"Ship_1"
 
 [node name="SFX3" type="AudioStreamPlayer3D" parent="." unique_id=935173986]
 stream = ExtResource("4_3v2ag")
-bus = &"Ship_2"
 
 [node name="SFX Rune" type="AudioStreamPlayer3D" parent="." unique_id=1623405961]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.1881101)
@@ -402,7 +400,7 @@ draw_pass_1 = SubResource("CapsuleMesh_fulsm")
 draw_pass_2 = null
 
 [node name="rain" type="GPUParticles3D" parent="." unique_id=43115889]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0031108856, 6.937068, -12.177663)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0031108856, 3.937068, -5.177663)
 amount = 500
 randomness = 0.6
 trail_lifetime = 0.2
@@ -412,7 +410,7 @@ draw_pass_1 = SubResource("CapsuleMesh_a38lo")
 draw_pass_2 = SubResource("CapsuleMesh_4ni07")
 
 [node name="rain_Billboard" type="GPUParticles3D" parent="." unique_id=1079677682]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0031108856, 6.937068, -7.8235807)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0031108856, 6.937068, -12.823581)
 amount = 500
 randomness = 0.6
 trail_lifetime = 0.2

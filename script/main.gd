@@ -18,6 +18,7 @@ var tentacle_attack_time : float = randf_range(7.0, 10.0)
 
 
 func _ready() -> void:
+	FadeTransition(0,2,1.3)
 	process_mode = Node.PROCESS_MODE_ALWAYS
 
 var ramming_speed : bool = false:
@@ -49,12 +50,14 @@ func _process(delta: float) -> void:
 		go_to_main_menu()
 
 func start_game() -> void:
-	get_tree().paused = false
-	
+	FadeTransition(0, 1, 0)
 	get_tree().change_scene_to_file("res://scenes/scene_manager.tscn")
 	await get_tree().scene_changed
+	get_tree().paused = false
+
 	ui.glass_rain_layer.visible = true
 	game.visible = true
+	
 
 func go_to_Settings_menu() -> void:
 	ui.settings_menu.visible = true
@@ -87,6 +90,7 @@ func die() -> void:
 	get_tree().paused = true
 	in_game = false
 	ui.change_label("You Died!")
+	ui.game_change_label.add_theme_color_override("font_color", Color(0.82, 0.149, 0.149))
 	ui.game_change.visible = true
 	ui.player_speed_bar.visible = false
 	ui.player_speed_bar_tex.visible = false
@@ -97,6 +101,7 @@ func won() -> void:
 	get_tree().paused = true
 	in_game = false
 	ui.change_label("You Won!")
+	ui.game_change_label.add_theme_color_override("font_color", Color(0.016, 0.553, 0.0))
 	ui.game_change.visible = true
 	ui.player_speed_bar.visible = false
 	ui.player_speed_bar_tex.visible = false
@@ -124,3 +129,36 @@ func change_wave_for(new_item ) -> void:
 			Box:
 				boxes_manager.spawn_box(random_follow_path)
 	
+
+func Wait(seconds: float) -> void:
+	await get_tree().create_timer(seconds).timeout
+
+# fades the screen to black (IN & OUT)
+func FadeTransition(FADEIN_DURATION: float, FADEOUT_DURATION: float, FADEHOLD_DURATION: float) -> bool:
+	var _r : bool = false
+
+	var canvas := CanvasLayer.new()
+	canvas.layer = 100
+	var fade_rect := ColorRect.new()
+	fade_rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	fade_rect.color = Color(0, 0, 0, 0)
+	fade_rect.size = get_viewport().get_visible_rect().size
+	fade_rect.anchors_preset = Control.PRESET_FULL_RECT
+	canvas.add_child(fade_rect)
+	add_child(canvas)
+	var fade_out := create_tween()
+	fade_out.tween_property(fade_rect, "color:a", 1.0, (FADEIN_DURATION))
+	await fade_out.finished
+
+	await Wait(FADEIN_DURATION)
+	
+	await Wait(FADEHOLD_DURATION)
+
+	var fade_in := create_tween()
+	fade_in.tween_property(fade_rect, "color:a", 0.0, (FADEOUT_DURATION))
+	await fade_in.finished
+
+	canvas.queue_free()
+	_r = true
+	
+	return _r
